@@ -1,0 +1,33 @@
+from sqlalchemy import Column, Integer, String, Text, DateTime, JSON
+from sqlalchemy.sql import func
+
+from app.database import Base
+
+
+class Mentor(Base):
+    __tablename__ = "mentors"
+
+    # Primary Key
+    id = Column(Integer, primary_key=True, index=True)
+
+    # Basic Info
+    name = Column(String(255), nullable=False)
+    email = Column(String(255), unique=True, nullable=False, index=True)
+
+    # Professional Info
+    organization = Column(String(255), nullable=True)
+    designation = Column(String(255), nullable=True)
+
+    # Expertise (stored as JSON array)
+    # Example: ["AI", "Machine Learning", "Cybersecurity"]
+    expertise = Column(JSON, nullable=False)
+
+    # Optional bio
+    bio = Column(Text, nullable=True)
+
+    # Optional links (future expansion)
+    linkedin_url = Column(String(500), nullable=True)
+    github_url = Column(String(500), nullable=True)
+
+    # Timestamp
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
