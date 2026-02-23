@@ -1,0 +1,85 @@
+.achievement-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.achievement-card:hover {
+  transform: translateY(-4px);
+}
+
+.achievement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.achievement-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.achievement-event {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.achievement-description {
+  margin-top: 10px;
+  color: #444;
+  font-size: 14px;
+}
+
+.achievement-tech {
+  margin-top: 12px;
+}
+
+.tech-badge {
+  display: inline-block;
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-right: 6px;
+  font-size: 12px;
+}
+
+.achievement-footer {
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #888;
+}
+
+/* Outcome colors */
+
+.achievement-outcome {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.outcome-won {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.outcome-runner {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.outcome-participated {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.outcome-default {
+  background: #f3f4f6;
+  color: #374151;
+}

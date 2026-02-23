@@ -1,0 +1,183 @@
+/* =========================================
+   Auth Context Global Styles
+   Renkei Production Theme
+========================================= */
+
+:root {
+  --auth-primary: #6366f1;
+  --auth-primary-hover: #4f46e5;
+  --auth-secondary: #06b6d4;
+  --auth-bg: #0f172a;
+  --auth-card-bg: #1e293b;
+  --auth-border: #334155;
+  --auth-text: #f1f5f9;
+  --auth-text-muted: #94a3b8;
+  --auth-success: #10b981;
+  --auth-error: #ef4444;
+}
+
+/* =========================================
+   Auth Container
+========================================= */
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #020617 100%
+  );
+  padding: 20px;
+}
+
+/* =========================================
+   Auth Card
+========================================= */
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--auth-card-bg);
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid var(--auth-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   Auth Header
+========================================= */
+
+.auth-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--auth-text);
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  font-size: 14px;
+  color: var(--auth-text-muted);
+  margin-bottom: 24px;
+}
+
+/* =========================================
+   Form Styles
+========================================= */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-label {
+  font-size: 13px;
+  color: var(--auth-text-muted);
+}
+
+.auth-input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--auth-border);
+  background: #020617;
+  color: var(--auth-text);
+  font-size: 14px;
+  transition: border 0.2s ease;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--auth-primary);
+}
+
+/* =========================================
+   Button Styles
+========================================= */
+
+.auth-button {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--auth-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-button:hover {
+  background: var(--auth-primary-hover);
+}
+
+.auth-button:disabled {
+  background: #475569;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   Auth Footer
+========================================= */
+
+.auth-footer {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--auth-text-muted);
+  text-align: center;
+}
+
+.auth-link {
+  color: var(--auth-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   Alerts
+========================================= */
+
+.auth-error {
+  padding: 10px;
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--auth-error);
+  font-size: 13px;
+}
+
+.auth-success {
+  padding: 10px;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--auth-success);
+  font-size: 13px;
+}
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 24px;
+  }
+
+  .auth-title {
+    font-size: 20px;
+  }
+}

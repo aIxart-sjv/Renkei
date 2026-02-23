@@ -11,24 +11,11 @@ class AchievementService:
     # Create Achievement
     # -----------------------------------
     @staticmethod
-<<<<<<< HEAD
-    def create_achievement(achievement_data, db: Session):
-        new_achievement = Achievement(**achievement_data.dict())
-        db.add(new_achievement)
-        db.commit()
-        db.refresh(new_achievement)
-        return new_achievement
+    def create_achievement(
+        achievement_data,
+        db: Session
+    ) -> Achievement:
 
-    # -----------------------------------
-    # Get Achievements by Student
-    # -----------------------------------
-    @staticmethod
-    def get_student_achievements(student_id: int, db: Session):
-        return db.query(Achievement).filter(
-            Achievement.student_id == student_id
-        ).all()
-=======
-    def create_achievement(achievement_data, db: Session) -> Achievement:
         new_achievement = Achievement(
             title=achievement_data.title,
             description=achievement_data.description,
@@ -46,22 +33,30 @@ class AchievementService:
 
         return new_achievement
 
-
     # -----------------------------------
-    # Get Achievements for a Student
+    # Get Achievements for Student
     # -----------------------------------
     @staticmethod
-    def get_student_achievements(student_id: int, db: Session) -> List[Achievement]:
+    def get_student_achievements(
+        student_id: int,
+        db: Session
+    ) -> List[Achievement]:
+
         return db.query(Achievement).filter(
             Achievement.student_id == student_id
-        ).order_by(Achievement.created_at.desc()).all()
-
+        ).order_by(
+            Achievement.created_at.desc()
+        ).all()
 
     # -----------------------------------
     # Delete Achievement
     # -----------------------------------
     @staticmethod
-    def delete_achievement(achievement_id: int, db: Session) -> bool:
+    def delete_achievement(
+        achievement_id: int,
+        db: Session
+    ) -> bool:
+
         achievement = db.query(Achievement).filter(
             Achievement.id == achievement_id
         ).first()
@@ -74,13 +69,15 @@ class AchievementService:
 
         return True
 
->>>>>>> ef695a4e05703ba4ec436b8a7ee643f7f61ae8a1
-
     # -----------------------------------
     # Calculate Performance Score
     # -----------------------------------
     @staticmethod
-    def calculate_performance_score(student_id: int, db: Session) -> float:
+    def calculate_performance_score(
+        student_id: int,
+        db: Session
+    ) -> float:
+
         achievements = db.query(Achievement).filter(
             Achievement.student_id == student_id
         ).all()
@@ -88,25 +85,13 @@ class AchievementService:
         if not achievements:
             return 0.0
 
-<<<<<<< HEAD
-        score = 0
-
-        for ach in achievements:
-            if ach.outcome:
-                if ach.outcome.lower() == "won":
-                    score += 10
-                elif ach.outcome.lower() == "runner-up":
-                    score += 6
-                elif ach.outcome.lower() == "participated":
-                    score += 2
-
-=======
         score = 0.0
 
         for ach in achievements:
 
             # Outcome scoring
             if ach.outcome:
+
                 outcome = ach.outcome.lower()
 
                 if outcome == "won":
@@ -121,44 +106,28 @@ class AchievementService:
                 elif outcome in ["lost", "failed"]:
                     score += 1
 
-            # Tech stack diversity scoring
->>>>>>> ef695a4e05703ba4ec436b8a7ee643f7f61ae8a1
+            # Tech diversity score
             if ach.technologies_used:
                 score += len(ach.technologies_used) * 0.5
 
         return round(score, 2)
 
-<<<<<<< HEAD
-    # -----------------------------------
-    # Analyze Win/Loss Pattern
-    # -----------------------------------
-    @staticmethod
-    def analyze_performance(student_id: int, db: Session) -> Dict:
-=======
-
     # -----------------------------------
     # Analyze Performance
     # -----------------------------------
     @staticmethod
-    def analyze_performance(student_id: int, db: Session) -> Dict:
+    def analyze_performance(
+        student_id: int,
+        db: Session
+    ) -> Dict:
 
->>>>>>> ef695a4e05703ba4ec436b8a7ee643f7f61ae8a1
         achievements = db.query(Achievement).filter(
             Achievement.student_id == student_id
         ).all()
 
         total = len(achievements)
-        wins = 0
-<<<<<<< HEAD
-        losses = 0
-        tech_counter = {}
 
-        for ach in achievements:
-            if ach.outcome:
-                if ach.outcome.lower() == "won":
-                    wins += 1
-                elif ach.outcome.lower() in ["lost", "failed"]:
-=======
+        wins = 0
         runner_ups = 0
         participations = 0
         losses = 0
@@ -168,6 +137,7 @@ class AchievementService:
         for ach in achievements:
 
             if ach.outcome:
+
                 outcome = ach.outcome.lower()
 
                 if outcome == "won":
@@ -180,45 +150,28 @@ class AchievementService:
                     participations += 1
 
                 elif outcome in ["lost", "failed"]:
->>>>>>> ef695a4e05703ba4ec436b8a7ee643f7f61ae8a1
                     losses += 1
 
             if ach.technologies_used:
+
                 for tech in ach.technologies_used:
-<<<<<<< HEAD
-                    tech_counter[tech] = tech_counter.get(tech, 0) + 1
 
-        win_rate = (wins / total) * 100 if total > 0 else 0
+                    tech_usage[tech] = tech_usage.get(
+                        tech, 0
+                    ) + 1
 
-        most_used_tech = sorted(
-            tech_counter.items(),
-=======
-                    tech_usage[tech] = tech_usage.get(tech, 0) + 1
-
-        win_rate = (wins / total * 100) if total > 0 else 0
+        win_rate = (
+            (wins / total) * 100
+            if total > 0 else 0
+        )
 
         most_used_tech = sorted(
             tech_usage.items(),
->>>>>>> ef695a4e05703ba4ec436b8a7ee643f7f61ae8a1
             key=lambda x: x[1],
             reverse=True
         )
 
         return {
-<<<<<<< HEAD
-            "total_participations": total,
-            "wins": wins,
-            "losses": losses,
-            "win_rate_percentage": round(win_rate, 2),
-            "most_used_technologies": most_used_tech[:5]
-        }
-
-    # -----------------------------------
-    # Improvement Suggestions (Basic AI Logic)
-    # -----------------------------------
-    @staticmethod
-    def suggest_improvements(student_id: int, db: Session) -> Dict:
-=======
             "total_achievements": total,
             "wins": wins,
             "runner_ups": runner_ups,
@@ -228,48 +181,53 @@ class AchievementService:
             "most_used_technologies": most_used_tech[:5],
         }
 
-
     # -----------------------------------
-    # Suggest Improvements (AI logic base)
+    # Suggest Improvements
     # -----------------------------------
     @staticmethod
-    def suggest_improvements(student_id: int, db: Session) -> Dict:
+    def suggest_improvements(
+        student_id: int,
+        db: Session
+    ) -> Dict:
 
->>>>>>> ef695a4e05703ba4ec436b8a7ee643f7f61ae8a1
-        analysis = AchievementService.analyze_performance(student_id, db)
+        analysis = AchievementService.analyze_performance(
+            student_id,
+            db
+        )
 
         suggestions = []
 
-<<<<<<< HEAD
-        if analysis["win_rate_percentage"] < 40:
-            suggestions.append("Improve problem-solving and domain depth.")
-
-        if analysis["wins"] == 0:
-            suggestions.append("Collaborate with stronger peers or mentors.")
-
-        if len(analysis["most_used_technologies"]) < 2:
-            suggestions.append("Diversify your tech stack.")
-
-        return {
-            "performance_analysis": analysis,
-=======
         if analysis["total_achievements"] == 0:
-            suggestions.append("Start participating in hackathons and projects.")
+
+            suggestions.append(
+                "Start participating in hackathons and projects."
+            )
 
         if analysis["win_rate_percentage"] < 40:
-            suggestions.append("Improve problem-solving skills and preparation.")
+
+            suggestions.append(
+                "Improve problem-solving skills and preparation."
+            )
 
         if analysis["wins"] == 0:
-            suggestions.append("Collaborate with experienced teammates or mentors.")
+
+            suggestions.append(
+                "Collaborate with experienced teammates or mentors."
+            )
 
         if len(analysis["most_used_technologies"]) < 3:
-            suggestions.append("Expand your tech stack to increase competitiveness.")
+
+            suggestions.append(
+                "Expand your tech stack to increase competitiveness."
+            )
 
         if not suggestions:
-            suggestions.append("Excellent performance. Continue building advanced projects.")
+
+            suggestions.append(
+                "Excellent performance. Continue building advanced projects."
+            )
 
         return {
             "analysis": analysis,
->>>>>>> ef695a4e05703ba4ec436b8a7ee643f7f61ae8a1
             "suggestions": suggestions
         }

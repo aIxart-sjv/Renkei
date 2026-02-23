@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy.sql import func
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, func
+from sqlalchemy.orm import relationship
+from datetime import datetime
 
 from app.database import Base
 
@@ -27,3 +28,5 @@ class User(Base):
 
     # Timestamp
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    alumni_profile = relationship("Alumni", back_populates="user", uselist=False)
