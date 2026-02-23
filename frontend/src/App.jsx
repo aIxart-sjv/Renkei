@@ -1,29 +1,16 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 
-// Context
-import { AuthProvider, AuthContext } from "./context/AuthContext";
+import { AuthContext } from "./context/AuthContext";
 
-// Pages
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Recommendations from "./pages/Recommendations";
 import Startups from "./pages/Startups";
 import Network from "./pages/Network";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
-// Optional: simple login placeholder (replace later)
-const Login = () => {
-  return (
-    <div style={styles.center}>
-      <h2>Renkei Login</h2>
-      <p>Login page coming soon</p>
-    </div>
-  );
-};
-
-/**
- * Protected Route Wrapper
- */
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
 
@@ -38,16 +25,11 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-/**
- * Main App Routes
- */
-const AppRoutes = () => {
+export default function App() {
   return (
     <Routes>
-      {/* Public */}
       <Route path="/login" element={<Login />} />
-
-      {/* Protected */}
+      <Route path="/register" element={<Register />} />
       <Route
         path="/"
         element={
@@ -93,28 +75,11 @@ const AppRoutes = () => {
         }
       />
 
-      {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
-};
-
-/**
- * Root App Component
- */
-export default function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
-    </AuthProvider>
-  );
 }
 
-/**
- * Simple styles (replace with Tailwind later)
- */
 const styles = {
   center: {
     display: "flex",
