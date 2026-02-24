@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Login.css";
 
-const API_BASE = "http://127.0.0.1:8000/api"; // change in production
-
 export default function Login() {
+
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [form, setForm] = useState({
     email: "",
@@ -15,7 +16,6 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Handle input change
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -23,7 +23,6 @@ export default function Login() {
     });
   };
 
-  // Handle login submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,42 +33,18 @@ export default function Login() {
       return;
     }
 
-    try {
-      setLoading(true);
+    setLoading(true);
 
-      const response = await fetch(`${API_BASE}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: form.email,
-          password: form.password,
-        }),
-      });
+    const result = await login(form.email, form.password);
 
-      const data = await response.json();
+    setLoading(false);
 
-      if (!response.ok) {
-        throw new Error(data.detail || "Login failed");
-      }
-
-      // Save token
-      localStorage.setItem("token", data.access_token);
-
-      // Save user info if provided
-      if (data.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-      }
-
-      // Redirect to dashboard
-      navigate("/dashboard");
-
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+    if (!result.success) {
+      setError(result.error);
+      return;
     }
+
+    navigate("/");
   };
 
   return (
@@ -118,6 +93,11 @@ export default function Login() {
           >
             {loading ? "Signing in..." : "Login"}
           </button>
+
+          <div style={{ marginTop: "15px", textAlign: "center" }}>
+            <span>Don't have an account? </span>
+            <Link to="/register">Create account</Link>
+          </div>
 
         </form>
 

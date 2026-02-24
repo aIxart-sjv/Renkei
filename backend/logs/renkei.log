@@ -1,2 +1,92 @@
 2026-02-23 10:57:52 | INFO | renkei | Starting Renkei backend...
 2026-02-23 16:41:22 | INFO | renkei | Starting Renkei backend...
+2026-02-24 11:39:41 | INFO | renkei | Starting Renkei backend...
+2026-02-24 11:51:14 | INFO | renkei | Starting Renkei backend...
+2026-02-24 11:51:15 | INFO | renkei | Database tables created successfully.
+2026-02-24 11:52:02 | INFO | renkei | OPTIONS http://127.0.0.1:8000/api/auth/register
+2026-02-24 11:52:02 | INFO | renkei | Response status: 200
+2026-02-24 11:52:02 | INFO | renkei | POST http://127.0.0.1:8000/api/auth/register
+2026-02-24 11:52:02 | INFO | renkei | Response status: 404
+2026-02-24 11:52:04 | INFO | renkei | POST http://127.0.0.1:8000/api/auth/register
+2026-02-24 11:52:04 | INFO | renkei | Response status: 404
+2026-02-24 12:00:40 | INFO | renkei | GET http://127.0.0.1:8000/docs
+2026-02-24 12:00:40 | INFO | renkei | Response status: 200
+2026-02-24 12:00:40 | INFO | renkei | GET http://127.0.0.1:8000/openapi.json
+2026-02-24 12:00:40 | INFO | renkei | Response status: 200
+2026-02-24 12:04:30 | INFO | renkei | OPTIONS http://127.0.0.1:8000/auth/register
+2026-02-24 12:04:30 | INFO | renkei | Response status: 200
+2026-02-24 12:04:30 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 12:04:34 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 12:07:48 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 12:07:51 | INFO | renkei | Starting Renkei backend...
+2026-02-24 12:07:52 | INFO | renkei | Database tables created successfully.
+2026-02-24 12:08:07 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 12:11:17 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 12:12:26 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 12:12:52 | INFO | renkei | Starting Renkei backend...
+2026-02-24 12:12:52 | INFO | renkei | Database tables created successfully.
+2026-02-24 12:13:14 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 12:13:58 | INFO | renkei | GET http://127.0.0.1:8000/
+2026-02-24 12:13:58 | INFO | renkei | Response status: 200
+2026-02-24 12:13:58 | INFO | renkei | GET http://127.0.0.1:8000/favicon.ico
+2026-02-24 12:13:58 | INFO | renkei | Response status: 404
+2026-02-24 13:21:12 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 13:21:24 | INFO | renkei | Starting Renkei backend...
+2026-02-24 13:21:24 | INFO | renkei | Database tables created successfully.
+2026-02-24 13:21:24 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 13:21:26 | INFO | renkei | Starting Renkei backend...
+2026-02-24 13:21:26 | INFO | renkei | Database tables created successfully.
+2026-02-24 13:21:52 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 13:22:08 | INFO | renkei | Starting Renkei backend...
+2026-02-24 13:22:08 | INFO | renkei | Database tables created successfully.
+2026-02-24 13:22:59 | INFO | renkei | OPTIONS http://127.0.0.1:8000/auth/register
+2026-02-24 13:22:59 | INFO | renkei | Response status: 200
+2026-02-24 13:22:59 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 13:23:17 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 13:33:33 | INFO | renkei | Starting Renkei backend...
+2026-02-24 13:33:33 | INFO | renkei | Database tables created successfully.
+2026-02-24 13:33:57 | INFO | renkei | OPTIONS http://127.0.0.1:8000/auth/register
+2026-02-24 13:33:57 | INFO | renkei | Response status: 200
+2026-02-24 13:33:57 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 13:34:21 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 13:38:32 | INFO | renkei | Starting Renkei backend...
+2026-02-24 13:38:32 | INFO | renkei | Database tables created successfully.
+2026-02-24 13:38:53 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 13:45:13 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 13:45:58 | INFO | renkei | Starting Renkei backend...
+2026-02-24 13:45:58 | INFO | renkei | Database tables created successfully.
+2026-02-24 13:46:15 | INFO | renkei | OPTIONS http://127.0.0.1:8000/auth/register
+2026-02-24 13:46:15 | INFO | renkei | Response status: 200
+2026-02-24 13:46:15 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 13:47:28 | INFO | renkei | Shutting down Renkei backend...
+2026-02-24 13:53:07 | INFO | renkei | Starting Renkei backend...
+2026-02-24 13:53:08 | INFO | renkei | Database tables created successfully.
+2026-02-24 13:53:58 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 13:53:59 | INFO | renkei | Response status: 200
+2026-02-24 13:54:21 | INFO | renkei | OPTIONS http://127.0.0.1:8000/api/auth/login
+2026-02-24 13:54:21 | INFO | renkei | Response status: 200
+2026-02-24 13:54:21 | INFO | renkei | POST http://127.0.0.1:8000/api/auth/login
+2026-02-24 13:54:21 | INFO | renkei | Response status: 404
+2026-02-24 13:54:23 | INFO | renkei | POST http://127.0.0.1:8000/api/auth/login
+2026-02-24 13:54:23 | INFO | renkei | Response status: 404
+2026-02-24 13:54:38 | INFO | renkei | POST http://127.0.0.1:8000/auth/register
+2026-02-24 13:54:38 | INFO | renkei | Response status: 400
+2026-02-24 13:56:42 | INFO | renkei | POST http://127.0.0.1:8000/api/auth/login
+2026-02-24 13:56:42 | INFO | renkei | Response status: 404
+2026-02-24 14:04:31 | INFO | renkei | GET http://127.0.0.1:8000/docs
+2026-02-24 14:04:31 | INFO | renkei | Response status: 200
+2026-02-24 14:04:31 | INFO | renkei | GET http://127.0.0.1:8000/openapi.json
+2026-02-24 14:04:31 | INFO | renkei | Response status: 200
+2026-02-24 14:05:15 | INFO | renkei | POST http://127.0.0.1:8000/auth/login
+2026-02-24 14:05:15 | INFO | renkei | Response status: 401
+2026-02-24 14:05:18 | INFO | renkei | POST http://127.0.0.1:8000/auth/login
+2026-02-24 14:05:18 | INFO | renkei | Response status: 401
+2026-02-24 14:05:40 | INFO | renkei | POST http://127.0.0.1:8000/auth/login
+2026-02-24 14:05:40 | INFO | renkei | Response status: 401
+2026-02-24 14:15:14 | INFO | renkei | OPTIONS http://127.0.0.1:8000/api/auth/login
+2026-02-24 14:15:14 | INFO | renkei | Response status: 200
+2026-02-24 14:15:14 | INFO | renkei | POST http://127.0.0.1:8000/api/auth/login
+2026-02-24 14:15:14 | INFO | renkei | Response status: 404
+2026-02-24 14:20:05 | INFO | renkei | POST http://127.0.0.1:8000/auth/login
+2026-02-24 14:20:05 | INFO | renkei | Response status: 200
+2026-02-24 14:27:15 | INFO | renkei | Shutting down Renkei backend...

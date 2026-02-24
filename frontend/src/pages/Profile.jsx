@@ -7,7 +7,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const API_BASE = "http://localhost:8000/api";
+  const API_BASE = "http://localhost:8000";
 
   // In production this should come from auth context / JWT
   const userId = localStorage.getItem("user_id") || 1;

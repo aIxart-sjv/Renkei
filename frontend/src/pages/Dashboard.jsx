@@ -8,7 +8,7 @@ import StartupCard from "../components/StartupCard";
 import AchievementsCard from "../components/AchievementsCard";
 import GraphView from "../components/GraphView";
 
-const API_BASE = "http://127.0.0.1:8000/api";
+const API_BASE = "http://127.0.0.1:8000";
 
 export default function Dashboard() {
   const [students, setStudents] = useState([]);

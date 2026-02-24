@@ -29,4 +29,9 @@ class User(Base):
     # Timestamp
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    alumni_profile = relationship("Alumni", back_populates="user", uselist=False)
+    alumni_profile = relationship(
+    "Alumni",
+    back_populates="user",
+    uselist=False,
+    cascade="all, delete-orphan"
+    )

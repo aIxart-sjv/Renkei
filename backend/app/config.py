@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     DESCRIPTION: str = "AI-Powered Campus Intelligence & Innovation Platform"
 
     # Database
-    DATABASE_URL: str = "postgresql://postgres:password@localhost:5432/renkei"
+    DATABASE_URL: str = "postgresql://postgres:20062006@localhost:5432/renkei"
 
     # Security
     SECRET_KEY: str = "supersecretkey"
