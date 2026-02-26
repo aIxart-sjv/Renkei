@@ -1,76 +1,29 @@
-import { useEffect, useState } from "react";
-import GraphView from "../components/GraphView";
-import api from "../services/api";
-import "../App.css";
-
-export default function Network() {
-  const [graphData, setGraphData] = useState({
-    nodes: [],
-    edges: [],
-  });
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetchGraph();
-  }, []);
-
-  const fetchGraph = async () => {
-    try {
-      setLoading(true);
-
-      // Backend endpoint: GET /graph
-      const response = await api.get("/graph");
-
-      setGraphData(response.data);
-    } catch (err) {
-      console.error("Failed to fetch graph:", err);
-      setError("Failed to load network graph.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="page-container">
-        <h2>Network</h2>
-        <p>Loading network graph...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="page-container">
-        <h2>Network</h2>
-        <p className="error">{error}</p>
-      </div>
-    );
-  }
-
-  if (!graphData.nodes.length) {
-    return (
-      <div className="page-container">
-        <h2>Network</h2>
-        <p>No network data available.</p>
-      </div>
-    );
-  }
-
+function Network() {
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h2>Collaboration Network</h2>
-        <p className="page-subtitle">
-          Visualize student collaborations, startup founders, and connections.
-        </p>
-      </div>
+    <div className="page">
+      <h1>Network</h1>
 
-      <div className="graph-container">
-        <GraphView data={graphData} />
+      <div className="card-grid">
+        <div className="info-card">
+          <h3>Arun Kumar</h3>
+          <p>Startup Founder</p>
+          <button>Connect</button>
+        </div>
+
+        <div className="info-card">
+          <h3>Meera Singh</h3>
+          <p>AI Mentor</p>
+          <button>Connect</button>
+        </div>
+
+        <div className="info-card">
+          <h3>Rahul Das</h3>
+          <p>Frontend Developer</p>
+          <button>Connect</button>
+        </div>
       </div>
     </div>
   );
 }
+
+export default Network;

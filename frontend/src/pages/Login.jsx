@@ -1,107 +1,22 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import "./Login.css";
+import { Link } from "react-router-dom";
 
-export default function Login() {
-
-  const navigate = useNavigate();
-  const { login } = useAuth();
-
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setError("");
-
-    if (!form.email || !form.password) {
-      setError("Please fill all fields");
-      return;
-    }
-
-    setLoading(true);
-
-    const result = await login(form.email, form.password);
-
-    setLoading(false);
-
-    if (!result.success) {
-      setError(result.error);
-      return;
-    }
-
-    navigate("/");
-  };
-
+function Login() {
   return (
-    <div className="login-container">
-      <div className="login-card">
+    <div className="page-center">
+      <div className="card">
+        <h2>Welcome Back</h2>
 
-        <h1 className="login-title">Renkei</h1>
-        <p className="login-subtitle">Sign in to your account</p>
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
 
-        <form onSubmit={handleSubmit} className="login-form">
+        <button>Login</button>
 
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {error && (
-            <div className="error-message">
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className="login-button"
-            disabled={loading}
-          >
-            {loading ? "Signing in..." : "Login"}
-          </button>
-
-          <div style={{ marginTop: "15px", textAlign: "center" }}>
-            <span>Don't have an account? </span>
-            <Link to="/register">Create account</Link>
-          </div>
-
-        </form>
-
+        <p style={{ fontSize: "14px", marginTop: "10px" }}>
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
       </div>
     </div>
   );
 }
+
+export default Login;

@@ -1,271 +1,42 @@
-/* ===============================
-   Renkei Global Styles
-   =============================== */
-
-:root {
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-
-  --secondary: #0f172a;
-  --accent: #06b6d4;
-
-  --background: #f8fafc;
-  --surface: #ffffff;
-
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-
-  --border: #e2e8f0;
-
-  --success: #16a34a;
-  --warning: #f59e0b;
-  --danger: #dc2626;
-
-  --radius: 10px;
-
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 10px rgba(0,0,0,0.08);
-  --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
-
-  --transition: 0.2s ease;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
-
-/* ===============================
-   Reset
-   =============================== */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-body {
-  background-color: var(--background);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color: var(--text-primary);
-  line-height: 1.5;
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-
-/* ===============================
-   Layout
-   =============================== */
-
-.app-container {
-  display: flex;
-  min-height: 100vh;
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
 }
-
-
-/* ===============================
-   Sidebar
-   =============================== */
-
-.sidebar {
-  width: 240px;
-  background: var(--secondary);
-  color: white;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-title {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 30px;
-}
-
-.sidebar-link {
-  padding: 10px 12px;
-  border-radius: var(--radius);
-  margin-bottom: 6px;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.sidebar-link:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.sidebar-link.active {
-  background: var(--primary);
-}
-
-
-/* ===============================
-   Main Content
-   =============================== */
-
-.main-content {
-  flex: 1;
-  padding: 30px;
-}
-
-
-/* ===============================
-   Header
-   =============================== */
-
-.page-header {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-
-/* ===============================
-   Cards
-   =============================== */
 
 .card {
-  background: var(--surface);
-  padding: 20px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+  padding: 2em;
 }
 
-.card:hover {
-  box-shadow: var(--shadow-md);
-}
-
-.card-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.card-subtitle {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-
-/* ===============================
-   Grid
-   =============================== */
-
-.grid {
-  display: grid;
-  gap: 20px;
-}
-
-.grid-2 {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-.grid-3 {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.grid-4 {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-
-/* ===============================
-   Buttons
-   =============================== */
-
-.button {
-  padding: 10px 16px;
-  border-radius: var(--radius);
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.button-primary {
-  background: var(--primary);
-  color: white;
-}
-
-.button-primary:hover {
-  background: var(--primary-hover);
-}
-
-.button-secondary {
-  background: #e2e8f0;
-  color: var(--secondary);
-}
-
-
-/* ===============================
-   Inputs
-   =============================== */
-
-.input {
-  padding: 10px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  width: 100%;
-  margin-bottom: 12px;
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--primary);
-}
-
-
-/* ===============================
-   Graph container
-   =============================== */
-
-.graph-container {
-  height: 500px;
-  background: white;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  padding: 10px;
-}
-
-
-/* ===============================
-   Loading
-   =============================== */
-
-.loading {
-  text-align: center;
-  padding: 40px;
-  color: var(--text-secondary);
-}
-
-
-/* ===============================
-   Responsive
-   =============================== */
-
-@media (max-width: 768px) {
-
-  .sidebar {
-    display: none;
-  }
-
-  .main-content {
-    padding: 15px;
-  }
-
-}
-.graph-container {
-  height: 600px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: var(--shadow);
-}
-
-.page-subtitle {
-  color: #666;
-  margin-top: 4px;
-}
-
-.error {
-  color: red;
+.read-the-docs {
+  color: #888;
 }
