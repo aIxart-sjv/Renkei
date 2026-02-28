@@ -1,104 +1,158 @@
 """
-Application-wide constants for Renkei
+Renkei System Constants
+
+Central definition of roles, entity types, connection types,
+ML defaults, and graph parameters.
 """
 
 
-# -----------------------------------
-# User Roles
-# -----------------------------------
+# =========================
+# USER ROLES
+# =========================
+
+ROLE_ADMIN = "admin"
 ROLE_STUDENT = "student"
 ROLE_MENTOR = "mentor"
 ROLE_ALUMNI = "alumni"
-ROLE_ADMIN = "admin"
-ROLE_INVESTOR = "investor"
 
-VALID_ROLES = [
+ALL_ROLES = [
+    ROLE_ADMIN,
     ROLE_STUDENT,
     ROLE_MENTOR,
-    ROLE_ALUMNI,
-    ROLE_ADMIN,
-    ROLE_INVESTOR,
+    ROLE_ALUMNI
 ]
 
 
-# -----------------------------------
-# Account Status
-# -----------------------------------
-STATUS_ACTIVE = "active"
-STATUS_INACTIVE = "inactive"
-STATUS_SUSPENDED = "suspended"
+# =========================
+# ENTITY TYPES (Graph Nodes)
+# =========================
 
-VALID_STATUSES = [
-    STATUS_ACTIVE,
-    STATUS_INACTIVE,
-    STATUS_SUSPENDED,
+ENTITY_STUDENT = "student"
+ENTITY_MENTOR = "mentor"
+ENTITY_ALUMNI = "alumni"
+ENTITY_STARTUP = "startup"
+
+ALL_ENTITY_TYPES = [
+    ENTITY_STUDENT,
+    ENTITY_MENTOR,
+    ENTITY_ALUMNI,
+    ENTITY_STARTUP
 ]
 
 
-# -----------------------------------
-# Startup Stages
-# -----------------------------------
-STARTUP_IDEATION = "Ideation"
-STARTUP_PROTOTYPE = "Prototype"
-STARTUP_MVP = "MVP"
-STARTUP_EARLY_REVENUE = "Early Revenue"
-STARTUP_GROWTH = "Growth"
-STARTUP_SCALING = "Scaling"
+# =========================
+# CONNECTION TYPES (Graph Edges)
+# =========================
 
-VALID_STARTUP_STAGES = [
-    STARTUP_IDEATION,
-    STARTUP_PROTOTYPE,
-    STARTUP_MVP,
-    STARTUP_EARLY_REVENUE,
-    STARTUP_GROWTH,
-    STARTUP_SCALING,
+CONNECTION_MENTORSHIP = "mentorship"
+CONNECTION_COLLABORATION = "collaboration"
+CONNECTION_STARTUP_MEMBER = "startup_member"
+CONNECTION_STARTUP_FOUNDER = "startup_founder"
+CONNECTION_PEER = "peer"
+CONNECTION_ADVISOR = "advisor"
+
+ALL_CONNECTION_TYPES = [
+    CONNECTION_MENTORSHIP,
+    CONNECTION_COLLABORATION,
+    CONNECTION_STARTUP_MEMBER,
+    CONNECTION_STARTUP_FOUNDER,
+    CONNECTION_PEER,
+    CONNECTION_ADVISOR
 ]
 
 
-# -----------------------------------
-# Achievement Categories
-# -----------------------------------
-ACHIEVEMENT_HACKATHON = "Hackathon"
-ACHIEVEMENT_PROJECT = "Project"
-ACHIEVEMENT_CERTIFICATION = "Certification"
-ACHIEVEMENT_STARTUP = "Startup"
+# =========================
+# ACHIEVEMENT TYPES
+# =========================
 
-VALID_ACHIEVEMENT_CATEGORIES = [
+ACHIEVEMENT_HACKATHON = "hackathon"
+ACHIEVEMENT_PROJECT = "project"
+ACHIEVEMENT_CERTIFICATION = "certification"
+ACHIEVEMENT_INTERNSHIP = "internship"
+ACHIEVEMENT_RESEARCH = "research"
+ACHIEVEMENT_STARTUP = "startup"
+
+ALL_ACHIEVEMENT_TYPES = [
     ACHIEVEMENT_HACKATHON,
     ACHIEVEMENT_PROJECT,
     ACHIEVEMENT_CERTIFICATION,
-    ACHIEVEMENT_STARTUP,
+    ACHIEVEMENT_INTERNSHIP,
+    ACHIEVEMENT_RESEARCH,
+    ACHIEVEMENT_STARTUP
 ]
 
 
-# -----------------------------------
-# Achievement Outcomes
-# -----------------------------------
-OUTCOME_WON = "Won"
-OUTCOME_RUNNER_UP = "Runner-up"
-OUTCOME_PARTICIPATED = "Participated"
-OUTCOME_LOST = "Lost"
+# =========================
+# STARTUP STAGES
+# =========================
 
-VALID_OUTCOMES = [
-    OUTCOME_WON,
-    OUTCOME_RUNNER_UP,
-    OUTCOME_PARTICIPATED,
-    OUTCOME_LOST,
+STARTUP_IDEA = "idea"
+STARTUP_PROTOTYPE = "prototype"
+STARTUP_MVP = "mvp"
+STARTUP_EARLY = "early"
+STARTUP_GROWTH = "growth"
+STARTUP_SCALE = "scale"
+
+ALL_STARTUP_STAGES = [
+    STARTUP_IDEA,
+    STARTUP_PROTOTYPE,
+    STARTUP_MVP,
+    STARTUP_EARLY,
+    STARTUP_GROWTH,
+    STARTUP_SCALE
 ]
 
 
-# -----------------------------------
-# Default Limits
-# -----------------------------------
-DEFAULT_PAGE_SIZE = 10
-MAX_PAGE_SIZE = 100
+# =========================
+# ML DEFAULT SETTINGS
+# =========================
+
+EMBEDDING_DIMENSION = 384
 
 DEFAULT_RECOMMENDATION_LIMIT = 10
 
+SIMILARITY_THRESHOLD = 0.65
 
-# -----------------------------------
-# Graph Weights (for innovation score)
-# -----------------------------------
-DEGREE_WEIGHT = 0.4
-BETWEENNESS_WEIGHT = 0.4
-CLOSENESS_WEIGHT = 0.2
+INNOVATION_SCORE_MAX = 100.0
+
+
+# =========================
+# GRAPH SETTINGS
+# =========================
+
+DEFAULT_EDGE_WEIGHT = 1.0
+
+COLLABORATION_WEIGHT = 1.5
+
+MENTORSHIP_WEIGHT = 2.0
+
+FOUNDER_WEIGHT = 2.5
+
+
+# =========================
+# TOKEN TYPES
+# =========================
+
+TOKEN_TYPE_ACCESS = "access"
+
+TOKEN_TYPE_REFRESH = "refresh"
+
+
+# =========================
+# CACHE KEYS
+# =========================
+
+CACHE_GRAPH = "graph_cache"
+
+CACHE_EMBEDDINGS = "embedding_cache"
+
+
+# =========================
+# SYSTEM LIMITS
+# =========================
+
+MAX_SKILLS_PER_ENTITY = 100
+
+MAX_CONNECTIONS_PER_ENTITY = 10000
+
+MAX_ACHIEVEMENTS_PER_STUDENT = 1000

@@ -1,189 +1,230 @@
-import sys
-import os
+"""
+Graph Intelligence Tests
 
-# Add backend directory to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+Run with:
+    pytest tests/test_graph.py -v
+"""
 
-from app.database import SessionLocal
-from app.services.graph_service import GraphService
+import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from app.db.base import Base
+
+from app.models.user import User, UserRole
 from app.models.student import Student
+from app.models.mentor import Mentor
 from app.models.connection import Connection
-from app.models.achievement import Achievement
-from app.models.startup import Startup
+
+from app.graph.builder import build_graph
+from app.graph.centrality import composite_centrality_score
+from app.graph.pagerank import compute_pagerank, normalize_pagerank
+
+from app.services.graph_service import (
+    get_graph_data,
+    get_innovation_scores,
+    get_top_innovators,
+    get_collaboration_score
+)
+
+from app.core.security import hash_password
 
 
-def seed_test_data(db):
-    """
-    Insert sample test data if database is empty
-    """
+# =========================
+# TEST DATABASE SETUP
+# =========================
 
-    if db.query(Student).count() > 0:
-        print("Test data already exists.")
-        return
+SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 
-    print("Seeding test data...")
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"check_same_thread": False}
+)
 
-    # Create students
-    student1 = Student(
-        name="Alice",
-        email="alice@test.com",
-        skills=["Python", "AI"],
-        interests=["Machine Learning", "Startups"],
+TestingSessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
+
+@pytest.fixture(scope="function")
+def db():
+
+    Base.metadata.create_all(bind=engine)
+
+    session = TestingSessionLocal()
+
+    yield session
+
+    session.close()
+
+    Base.metadata.drop_all(bind=engine)
+
+
+# =========================
+# CREATE TEST DATA
+# =========================
+
+def create_test_data(db):
+
+    user1 = User(
+        email="student@test.com",
+        username="student",
+        hashed_password=hash_password("password"),
+        role=UserRole.student
     )
 
-    student2 = Student(
-        name="Bob",
-        email="bob@test.com",
-        skills=["JavaScript", "React"],
-        interests=["Web Development", "Startups"],
+    user2 = User(
+        email="mentor@test.com",
+        username="mentor",
+        hashed_password=hash_password("password"),
+        role=UserRole.mentor
     )
 
-    student3 = Student(
-        name="Charlie",
-        email="charlie@test.com",
-        skills=["Python", "Data Science"],
-        interests=["AI", "Analytics"],
-    )
-
-    db.add_all([student1, student2, student3])
+    db.add_all([user1, user2])
     db.commit()
 
-    db.refresh(student1)
-    db.refresh(student2)
-    db.refresh(student3)
-
-    # Create connections
-    connection1 = Connection(
-        source_id=student1.id,
-        target_id=student2.id,
-        connection_type="student_student"
+    student = Student(
+        user_id=user1.id,
+        skills="Python, AI",
+        innovation_score=50
     )
 
-    connection2 = Connection(
-        source_id=student1.id,
-        target_id=student3.id,
-        connection_type="student_student"
+    mentor = Mentor(
+        user_id=user2.id,
+        skills="Python, ML",
+        mentorship_score=80,
+        available=True
     )
 
-    db.add_all([connection1, connection2])
+    db.add_all([student, mentor])
     db.commit()
 
-    # Create achievement collaboration
-    achievement1 = Achievement(
-        title="Hackathon Winner",
-        category="Hackathon",
-        outcome="Won",
-        technologies_used=["Python", "FastAPI"],
-        event_name="HackFest 2026",
-        student_id=student1.id
+    connection = Connection(
+        source_id=student.id,
+        source_type="student",
+        target_id=mentor.id,
+        target_type="mentor",
+        connection_type="mentorship",
+        strength=0.9
     )
 
-    achievement2 = Achievement(
-        title="Hackathon Participant",
-        category="Hackathon",
-        outcome="Participated",
-        technologies_used=["React"],
-        event_name="HackFest 2026",
-        student_id=student2.id
-    )
-
-    db.add_all([achievement1, achievement2])
+    db.add(connection)
     db.commit()
 
-    # Create startup
-    startup = Startup(
-        name="AI Startup",
-        domain="AI",
-        tech_stack=["Python", "FastAPI"],
-        founders=[student1.id, student3.id],
-        stage="MVP"
+    return student, mentor
+
+
+# =========================
+# TEST GRAPH BUILDING
+# =========================
+
+def test_build_graph(db):
+
+    student, mentor = create_test_data(db)
+
+    graph = build_graph(db)
+
+    assert graph is not None
+    assert graph.number_of_nodes() >= 2
+    assert graph.number_of_edges() >= 1
+
+
+# =========================
+# TEST CENTRALITY
+# =========================
+
+def test_centrality_score(db):
+
+    student, mentor = create_test_data(db)
+
+    graph = build_graph(db)
+
+    scores = composite_centrality_score(graph)
+
+    assert scores is not None
+    assert student.id in scores
+
+
+# =========================
+# TEST PAGERANK
+# =========================
+
+def test_pagerank(db):
+
+    student, mentor = create_test_data(db)
+
+    graph = build_graph(db)
+
+    pagerank = normalize_pagerank(
+        compute_pagerank(graph)
     )
 
-    db.add(startup)
-    db.commit()
-
-    print("Test data seeded.")
+    assert pagerank is not None
+    assert student.id in pagerank
 
 
-def test_graph_build():
-    db = SessionLocal()
+# =========================
+# TEST GRAPH SERVICE DATA
+# =========================
 
-    try:
-        seed_test_data(db)
+def test_graph_service_data(db):
 
-        print("\nBuilding graph...")
-        graph = GraphService.build_graph(db)
+    create_test_data(db)
 
-        print(f"Nodes: {len(graph.nodes())}")
-        print(f"Edges: {len(graph.edges())}")
+    data = get_graph_data(db)
 
-        print("\nNodes:")
-        for node in graph.nodes(data=True):
-            print(node)
-
-        print("\nEdges:")
-        for edge in graph.edges(data=True):
-            print(edge)
-
-    finally:
-        db.close()
+    assert "nodes" in data
+    assert "edges" in data
+    assert len(data["nodes"]) > 0
 
 
-def test_innovation_scores():
-    db = SessionLocal()
+# =========================
+# TEST INNOVATION SCORES
+# =========================
 
-    try:
-        print("\nCalculating innovation scores...")
+def test_innovation_scores(db):
 
-        scores = GraphService.calculate_innovation_scores(db)
+    student, mentor = create_test_data(db)
 
-        for student_id, score in scores.items():
-            print(f"Student {student_id}: Innovation Score = {score}")
+    scores = get_innovation_scores(db)
 
-    finally:
-        db.close()
+    assert len(scores) > 0
 
+    entity_ids = [
+        s["entity_id"]
+        for s in scores
+    ]
 
-def test_top_innovators():
-    db = SessionLocal()
-
-    try:
-        print("\nTop innovators:")
-
-        innovators = GraphService.get_top_innovators(db, limit=5)
-
-        for innovator in innovators:
-            print(innovator)
-
-    finally:
-        db.close()
+    assert student.id in entity_ids
 
 
-def test_graph_visualization_data():
-    db = SessionLocal()
+# =========================
+# TEST TOP INNOVATORS
+# =========================
 
-    try:
-        print("\nGraph visualization data:")
+def test_top_innovators(db):
 
-        data = GraphService.get_graph_data(db)
+    create_test_data(db)
 
-        print("Nodes:")
-        print(data["nodes"])
+    innovators = get_top_innovators(db)
 
-        print("Edges:")
-        print(data["edges"])
-
-    finally:
-        db.close()
+    assert innovators is not None
+    assert len(innovators) > 0
 
 
-if __name__ == "__main__":
+# =========================
+# TEST COLLABORATION SCORE
+# =========================
 
-    print("=== TESTING GRAPH SERVICE ===")
+def test_collaboration_score(db):
 
-    test_graph_build()
-    test_innovation_scores()
-    test_top_innovators()
-    test_graph_visualization_data()
+    student, mentor = create_test_data(db)
 
-    print("\n=== GRAPH TEST COMPLETE ===")
+    score = get_collaboration_score(
+        db,
+        student.id
+    )
+
+    assert score >= 0

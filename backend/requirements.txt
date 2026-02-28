@@ -1,29 +1,15 @@
-# FastAPI core
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
-
-# Database
-sqlalchemy==2.0.35
-psycopg2-binary==2.9.9
-
-# Validation and settings
-pydantic==2.9.2
-email-validator==2.2.0
-python-dotenv==1.0.1
-
-# Authentication
-passlib[bcrypt]==1.7.4
-python-jose[cryptography]==3.3.0
-
-# AI / Matching / Recommendation
-scikit-learn==1.5.2
-networkx==3.3
-
-# Utilities
-python-multipart==0.0.9
-
-# Migrations (recommended)
-alembic==1.13.3
-
-# Testing (optional but recommended)
-pytest==8.3.3
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+pydantic
+python-jose
+passlib[bcrypt]
+networkx
+numpy
+scikit-learn
+joblib
+sentence-transformers
+alembic
+faker
+pytest

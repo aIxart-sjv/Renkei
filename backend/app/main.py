@@ -1,147 +1,72 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.database import Base, engine
-from app.utils.logger import logger
+from app.api.router import api_router
 
-# Import all routers
-from app.api.routes import (
-    auth_routes,
-    student_routes,
-    mentor_routes,
-    alumni_routes,
-    startup_routes,
-    achievement_routes,
-    recommendation_routes,
-    graph_routes,
-)
+# Optional later
+# from app.db.init_db import init_db
 
-# -----------------------------------
-# Create FastAPI app
-# -----------------------------------
+
+# Create FastAPI instance
 app = FastAPI(
     title="Renkei API",
-    description="AI-powered Innovation, Matching, and Startup Intelligence Platform",
+    description="AI-Powered Innovation Intelligence Platform",
     version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
 )
 
 
-# -----------------------------------
-# Enable CORS (for frontend connection)
-# -----------------------------------
+# CORS configuration (frontend communication)
+origins = [
+    "http://localhost:5173",  # Vite frontend
+    "http://localhost:3000",  # optional React default
+    "*",  # allow all for development (restrict in production)
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    ],  # change to frontend URL in production
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-# -----------------------------------
-# Create database tables automatically
-# -----------------------------------
-@app.on_event("startup")
-def startup_event():
-    logger.info("Starting Renkei backend...")
-
-    # Create all database tables
-    Base.metadata.create_all(bind=engine)
-
-    logger.info("Database tables created successfully.")
+# Include API router
+app.include_router(api_router, prefix="/api")
 
 
-# -----------------------------------
-# Shutdown event
-# -----------------------------------
-@app.on_event("shutdown")
-def shutdown_event():
-    logger.info("Shutting down Renkei backend...")
-
-
-# -----------------------------------
-# Health check endpoint
-# -----------------------------------
+# Root endpoint
 @app.get("/")
-def root():
+async def root():
     return {
         "message": "Renkei API is running",
-        "status": "healthy",
-        "version": "1.0.0"
+        "status": "success",
+        "version": "1.0.0",
     }
 
 
+# Health check endpoint
 @app.get("/health")
-def health_check():
+async def health_check():
     return {
-        "status": "ok"
+        "status": "healthy"
     }
 
 
-# -----------------------------------
-# Register Routers
-# -----------------------------------
-app.include_router(
-    auth_routes.router,
-    prefix="/auth",
-    tags=["Authentication"]
-)
+# Startup event
+@app.on_event("startup")
+async def startup_event():
+    print("Renkei API starting...")
 
-app.include_router(
-    student_routes.router,
-    prefix="/students",
-    tags=["Students"]
-)
+    # Later enable this
+    # init_db()
 
-app.include_router(
-    mentor_routes.router,
-    prefix="/mentors",
-    tags=["Mentors"]
-)
-
-app.include_router(
-    alumni_routes.router,
-    prefix="/alumni",
-    tags=["Alumni"]
-)
-
-app.include_router(
-    startup_routes.router,
-    prefix="/startups",
-    tags=["Startups"]
-)
-
-app.include_router(
-    achievement_routes.router,
-    prefix="/achievements",
-    tags=["Achievements"]
-)
-
-app.include_router(
-    recommendation_routes.router,
-    prefix="/recommendations",
-    tags=["Recommendations"]
-)
-
-app.include_router(
-    graph_routes.router,
-    prefix="/graph",
-    tags=["Graph Analytics"]
-)
+    print("Renkei API started successfully")
 
 
-# -----------------------------------
-# Optional: global exception logging
-# -----------------------------------
-@app.middleware("http")
-async def log_requests(request, call_next):
-    logger.info(f"{request.method} {request.url}")
-
-    response = await call_next(request)
-
-    logger.info(f"Response status: {response.status_code}")
-
-    return response
+# Shutdown event
+@app.on_event("shutdown")
+async def shutdown_event():
+    print("Renkei API shutting down...")

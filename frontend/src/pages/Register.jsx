@@ -1,162 +1,83 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { registerUser } from "../api/auth";
 import { useNavigate, Link } from "react-router-dom";
-import "./Auth.css";
+import "./Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "",
+  const [form, setForm] = useState({
     email: "",
+    username: "",
     password: "",
-    role: "student",
+    full_name: ""
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
-  // Handle input change
   const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
   };
 
-  // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
-    setError(null);
-
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      await registerUser(form);
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.detail || "Registration failed");
-      }
-
-      const data = await response.json();
-
-      // Optional: store token if backend returns it
-      if (data.access_token) {
-        localStorage.setItem("token", data.access_token);
-      }
-
-      // Redirect to dashboard or login
-      navigate("/dashboard");
-
+      // after register → login page
+      navigate("/login");
     } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      setError("Registration failed");
+      console.error(err);
     }
   };
 
   return (
-    <div className="auth-container">
+    <div className="register-container">
+      <form className="register-card" onSubmit={handleSubmit}>
+        <h2>Create Account</h2>
 
-      <div className="auth-card">
+        {error && <p className="error">{error}</p>}
 
-        <h2 className="auth-title">Create Account</h2>
+        <input
+          name="full_name"
+          placeholder="Full Name"
+          onChange={handleChange}
+          required
+        />
 
-        <p className="auth-subtitle">
-          Join Renkei and start building your innovation network
+        <input
+          name="username"
+          placeholder="Username"
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+          required
+        />
+
+        <button type="submit">Register</button>
+
+        <p>
+          Already have account? <Link to="/login">Login</Link>
         </p>
-
-        {error && (
-          <div className="auth-error">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="auth-form">
-
-          {/* Name */}
-          <div className="auth-field">
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {/* Email */}
-          <div className="auth-field">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {/* Password */}
-          <div className="auth-field">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {/* Role */}
-          <div className="auth-field">
-            <label>Role</label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-            >
-              <option value="student">Student</option>
-              <option value="mentor">Mentor</option>
-              <option value="alumni">Alumni</option>
-            </select>
-          </div>
-
-          {/* Submit */}
-          <button
-            type="submit"
-            className="auth-button"
-            disabled={loading}
-          >
-            {loading ? "Creating account..." : "Register"}
-          </button>
-
-        </form>
-
-        {/* Footer */}
-        <div className="auth-footer">
-          Already have an account?
-          <Link to="/login"> Login</Link>
-        </div>
-
-      </div>
-
+      </form>
     </div>
   );
 };

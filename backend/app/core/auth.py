@@ -1,72 +1,149 @@
-from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
+from datetime import datetime, timedelta
+from typing import Optional
 
-from app.database import get_db
-from app.models.user import User
-from app.core.security import decode_access_token
+from jose import jwt, JWTError
+from fastapi import HTTPException, status
 
-
-# -----------------------------------
-# OAuth2 scheme
-# -----------------------------------
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+from app.config import settings
 
 
-# -----------------------------------
-# Get Current User from JWT
-# -----------------------------------
-def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    db: Session = Depends(get_db)
-) -> User:
+# =========================
+# CREATE ACCESS TOKEN
+# =========================
+
+def create_access_token(
+    subject: str | int,
+    expires_delta: Optional[timedelta] = None
+) -> str:
     """
-    Extract user from JWT token
+    Create JWT access token
+
+    subject: usually user_id
     """
 
-    payload = decode_access_token(token)
-
-    if not payload:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid or expired token",
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(
+            minutes=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES
         )
 
-    user_id = payload.get("user_id")
+    payload = {
+        "sub": str(subject),
+        "exp": expire,
+        "iat": datetime.utcnow(),
+        "type": "access"
+    }
 
-    if not user_id:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token payload",
-        )
+    token = jwt.encode(
+        payload,
+        settings.JWT_SECRET_KEY,
+        algorithm=settings.JWT_ALGORITHM
+    )
 
-    user = db.query(User).filter(User.id == user_id).first()
-
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not found",
-        )
-
-    return user
+    return token
 
 
-# -----------------------------------
-# Role-Based Access Control
-# -----------------------------------
-def require_role(required_role: str):
+# =========================
+# VERIFY TOKEN
+# =========================
+
+def verify_token(token: str) -> dict:
     """
-    Dependency for role-based access control
+    Decode and validate JWT token
     """
 
-    def role_checker(current_user: User = Depends(get_current_user)):
+    try:
 
-        if current_user.role != required_role:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="Access denied"
-            )
+        payload = jwt.decode(
+            token,
+            settings.JWT_SECRET_KEY,
+            algorithms=[settings.JWT_ALGORITHM]
+        )
 
-        return current_user
+        return payload
 
-    return role_checker
+    except JWTError:
+
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token"
+        )
+
+
+# =========================
+# EXTRACT USER ID
+# =========================
+
+def get_user_id_from_token(token: str) -> int:
+    """
+    Extract user_id from JWT token
+    """
+
+    payload = verify_token(token)
+
+    user_id = payload.get("sub")
+
+    if user_id is None:
+
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token payload"
+        )
+
+    return int(user_id)
+
+
+# =========================
+# OPTIONAL: CREATE REFRESH TOKEN
+# =========================
+
+def create_refresh_token(
+    subject: str | int
+) -> str:
+    """
+    Long-lived refresh token
+    """
+
+    expire = datetime.utcnow() + timedelta(days=7)
+
+    payload = {
+        "sub": str(subject),
+        "exp": expire,
+        "iat": datetime.utcnow(),
+        "type": "refresh"
+    }
+
+    token = jwt.encode(
+        payload,
+        settings.JWT_SECRET_KEY,
+        algorithm=settings.JWT_ALGORITHM
+    )
+
+    return token
+
+
+# =========================
+# VERIFY TOKEN TYPE
+# =========================
+
+def verify_token_type(
+    token: str,
+    expected_type: str = "access"
+) -> dict:
+    """
+    Ensure correct token type
+    """
+
+    payload = verify_token(token)
+
+    token_type = payload.get("type")
+
+    if token_type != expected_type:
+
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Invalid token type: expected {expected_type}"
+        )
+
+    return payload

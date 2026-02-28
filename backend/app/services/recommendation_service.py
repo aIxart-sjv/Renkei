@@ -1,285 +1,226 @@
 from sqlalchemy.orm import Session
-from typing import List, Dict
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from typing import List, Dict, Any
+
+from app.core.logger import get_logger
 
 from app.models.student import Student
 from app.models.mentor import Mentor
 from app.models.startup import Startup
 from app.models.alumni import Alumni
-from app.services.graph_service import GraphService
+
+from app.services.ml_service import (
+    get_entity_embedding,
+    compute_entity_similarity
+)
+
+from app.services.graph_service import (
+    get_graph
+)
+
+from app.ml.inference.recommender import recommend_entities
 
 
-class RecommendationService:
+logger = get_logger(__name__)
 
-    # -----------------------------------
-    # Internal similarity function
-    # -----------------------------------
-    @staticmethod
-    def _calculate_similarity(
-        base_text: str,
-        comparison_texts: List[str]
-    ) -> List[float]:
 
-        if not comparison_texts:
-            return []
+# =========================
+# GENERIC RECOMMENDATION
+# =========================
 
-        documents = [base_text] + comparison_texts
+def recommend(
+    db: Session,
+    entity_id: int,
+    entity_type: str,
+    target_type: str,
+    top_k: int = 10
+) -> List[Dict[str, Any]]:
+    """
+    ML-based recommendation
+    """
 
-        vectorizer = CountVectorizer().fit_transform(documents)
+    results = recommend_entities(
+        db=db,
+        entity_id=entity_id,
+        entity_type=entity_type,
+        target_type=target_type,
+        top_k=top_k
+    )
 
-        vectors = vectorizer.toarray()
+    return results
 
-        similarity_scores = cosine_similarity(
-            [vectors[0]],
-            vectors[1:]
-        )[0]
 
-        return similarity_scores.tolist()
+# =========================
+# RECOMMEND MENTORS FOR STUDENT
+# =========================
 
-    # -----------------------------------
-    # Recommend Students (Peer Matching)
-    # -----------------------------------
-    @staticmethod
-    def recommend_students(
-        student_id: int,
-        db: Session,
-        limit: int = 10
-    ) -> List[Dict]:
+def recommend_mentors_for_student(
+    db: Session,
+    student_id: int,
+    top_k: int = 10
+) -> List[Dict[str, Any]]:
 
-        base_student = db.query(Student).filter(
-            Student.id == student_id
-        ).first()
+    mentors = db.query(Mentor).filter(
+        Mentor.available == True
+    ).all()
 
-        if not base_student:
-            return []
+    results = []
 
-        other_students = db.query(Student).filter(
-            Student.id != student_id
-        ).all()
+    for mentor in mentors:
 
-        base_text = " ".join(
-            (base_student.skills or []) +
-            (base_student.interests or [])
+        similarity = compute_entity_similarity(
+            db,
+            student_id,
+            "student",
+            mentor.id,
+            "mentor"
         )
 
-        comparison_texts = [
-            " ".join(
-                (student.skills or []) +
-                (student.interests or [])
-            )
-            for student in other_students
-        ]
+        results.append({
+            "entity_id": mentor.id,
+            "entity_type": "mentor",
+            "score": similarity
+        })
 
-        similarity_scores = RecommendationService._calculate_similarity(
-            base_text,
-            comparison_texts
+    results.sort(
+        key=lambda x: x["score"],
+        reverse=True
+    )
+
+    return results[:top_k]
+
+
+# =========================
+# RECOMMEND STARTUPS FOR STUDENT
+# =========================
+
+def recommend_startups_for_student(
+    db: Session,
+    student_id: int,
+    top_k: int = 10
+) -> List[Dict[str, Any]]:
+
+    startups = db.query(Startup).all()
+
+    results = []
+
+    for startup in startups:
+
+        similarity = compute_entity_similarity(
+            db,
+            student_id,
+            "student",
+            startup.id,
+            "startup"
         )
 
-        innovation_scores = GraphService.calculate_innovation_scores(db)
+        results.append({
+            "entity_id": startup.id,
+            "entity_type": "startup",
+            "score": similarity
+        })
 
-        results = []
+    results.sort(
+        key=lambda x: x["score"],
+        reverse=True
+    )
 
-        for student, similarity in zip(other_students, similarity_scores):
+    return results[:top_k]
 
-            innovation_score = innovation_scores.get(student.id, 0)
 
-            final_score = (
-                0.7 * similarity +
-                0.3 * innovation_score
-            )
+# =========================
+# RECOMMEND STUDENTS
+# =========================
 
-            results.append({
-                "student_id": student.id,
-                "name": student.name,
-                "skills": student.skills,
-                "interests": student.interests,
-                "similarity_score": round(similarity, 4),
-                "innovation_score": round(innovation_score, 4),
-                "final_score": round(final_score, 4)
-            })
+def recommend_students(
+    db: Session,
+    student_id: int,
+    top_k: int = 10
+) -> List[Dict[str, Any]]:
 
-        results.sort(
-            key=lambda x: x["final_score"],
-            reverse=True
+    students = db.query(Student).filter(
+        Student.id != student_id
+    ).all()
+
+    results = []
+
+    for student in students:
+
+        similarity = compute_entity_similarity(
+            db,
+            student_id,
+            "student",
+            student.id,
+            "student"
         )
 
-        return results[:limit]
+        results.append({
+            "entity_id": student.id,
+            "entity_type": "student",
+            "score": similarity
+        })
 
-    # -----------------------------------
-    # Recommend Mentors
-    # -----------------------------------
-    @staticmethod
-    def recommend_mentors(
-        student_id: int,
-        db: Session,
-        limit: int = 10
-    ) -> List[Dict]:
+    results.sort(
+        key=lambda x: x["score"],
+        reverse=True
+    )
 
-        student = db.query(Student).filter(
-            Student.id == student_id
-        ).first()
+    return results[:top_k]
 
-        if not student:
-            return []
 
-        mentors = db.query(Mentor).all()
+# =========================
+# RECOMMEND ALUMNI
+# =========================
 
-        base_text = " ".join(
-            (student.skills or []) +
-            (student.interests or [])
+def recommend_alumni(
+    db: Session,
+    student_id: int,
+    top_k: int = 10
+) -> List[Dict[str, Any]]:
+
+    alumni_list = db.query(Alumni).all()
+
+    results = []
+
+    for alumni in alumni_list:
+
+        similarity = compute_entity_similarity(
+            db,
+            student_id,
+            "student",
+            alumni.id,
+            "alumni"
         )
 
-        comparison_texts = [
-            " ".join(mentor.expertise or [])
-            for mentor in mentors
-        ]
+        results.append({
+            "entity_id": alumni.id,
+            "entity_type": "alumni",
+            "score": similarity
+        })
 
-        similarity_scores = RecommendationService._calculate_similarity(
-            base_text,
-            comparison_texts
-        )
+    results.sort(
+        key=lambda x: x["score"],
+        reverse=True
+    )
 
-        results = []
+    return results[:top_k]
 
-        for mentor, similarity in zip(mentors, similarity_scores):
 
-            results.append({
-                "mentor_id": mentor.id,
-                "name": mentor.name,
-                "organization": mentor.organization,
-                "designation": mentor.designation,
-                "expertise": mentor.expertise,
-                "match_score": round(similarity, 4)
-            })
+# =========================
+# FULL RECOMMENDATION
+# =========================
 
-        results.sort(
-            key=lambda x: x["match_score"],
-            reverse=True
-        )
+def full_recommendation(
+    db: Session,
+    student_id: int,
+    top_k: int = 5
+) -> Dict[str, List[Dict[str, Any]]]:
+    """
+    Combined ecosystem recommendations
+    """
 
-        return results[:limit]
-
-    # -----------------------------------
-    # Recommend Alumni
-    # -----------------------------------
-    @staticmethod
-    def recommend_alumni(
-        student_id: int,
-        db: Session,
-        limit: int = 10
-    ) -> List[Dict]:
-
-        student = db.query(Student).filter(
-            Student.id == student_id
-        ).first()
-
-        if not student:
-            return []
-
-        alumni_list = db.query(Alumni).all()
-
-        base_text = " ".join(
-            (student.skills or []) +
-            (student.interests or [])
-        )
-
-        comparison_texts = [
-            " ".join(alumni.expertise or [])
-            for alumni in alumni_list
-        ]
-
-        similarity_scores = RecommendationService._calculate_similarity(
-            base_text,
-            comparison_texts
-        )
-
-        results = []
-
-        for alumni, similarity in zip(alumni_list, similarity_scores):
-
-            results.append({
-                "alumni_id": alumni.id,
-                "name": alumni.name,
-                "organization": alumni.organization,
-                "designation": alumni.designation,
-                "expertise": alumni.expertise,
-                "match_score": round(similarity, 4)
-            })
-
-        results.sort(
-            key=lambda x: x["match_score"],
-            reverse=True
-        )
-
-        return results[:limit]
-
-    # -----------------------------------
-    # Recommend Startups
-    # -----------------------------------
-    @staticmethod
-    def recommend_startups(
-        student_id: int,
-        db: Session,
-        limit: int = 10
-    ) -> List[Dict]:
-
-        student = db.query(Student).filter(
-            Student.id == student_id
-        ).first()
-
-        if not student:
-            return []
-
-        startups = db.query(Startup).all()
-
-        base_text = " ".join(
-            (student.skills or []) +
-            (student.interests or [])
-        )
-
-        comparison_texts = [
-            startup.domain + " " +
-            " ".join(startup.tech_stack or [])
-            for startup in startups
-        ]
-
-        similarity_scores = RecommendationService._calculate_similarity(
-            base_text,
-            comparison_texts
-        )
-
-        results = []
-
-        for startup, similarity in zip(startups, similarity_scores):
-
-            results.append({
-                "startup_id": startup.id,
-                "name": startup.name,
-                "domain": startup.domain,
-                "tech_stack": startup.tech_stack,
-                "match_score": round(similarity, 4)
-            })
-
-        results.sort(
-            key=lambda x: x["match_score"],
-            reverse=True
-        )
-
-        return results[:limit]
-
-    # -----------------------------------
-    # Full Recommendation Bundle
-    # -----------------------------------
-    @staticmethod
-    def get_full_recommendations(
-        student_id: int,
-        db: Session
-    ) -> Dict:
-
-        return {
-            "students": RecommendationService.recommend_students(student_id, db),
-            "mentors": RecommendationService.recommend_mentors(student_id, db),
-            "alumni": RecommendationService.recommend_alumni(student_id, db),
-            "startups": RecommendationService.recommend_startups(student_id, db),
-        }
+    return {
+        "students": recommend_students(db, student_id, top_k),
+        "mentors": recommend_mentors_for_student(db, student_id, top_k),
+        "startups": recommend_startups_for_student(db, student_id, top_k),
+        "alumni": recommend_alumni(db, student_id, top_k)
+    }

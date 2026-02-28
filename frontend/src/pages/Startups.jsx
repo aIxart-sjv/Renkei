@@ -1,127 +1,115 @@
-import { useEffect, useState, useMemo } from "react";
-import StartupCard from "../components/StartupCard";
-import api from "../services/api";
+// frontend/src/pages/Startups.jsx
+
+import { useEffect, useState } from "react";
 import "./Startups.css";
 
+import { getStartups } from "../api/startups";
+import Card from "../components/common/Card";
+
 const Startups = () => {
+
   const [startups, setStartups] = useState([]);
-  const [filteredStartups, setFilteredStartups] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [search, setSearch] = useState("");
-  const [domainFilter, setDomainFilter] = useState("all");
 
-  // Fetch startups from backend
   useEffect(() => {
-    const fetchStartups = async () => {
-      try {
-        setLoading(true);
-
-        // expected endpoint: GET /startups
-        const response = await api.get("/startups");
-
-        const data = response.data || [];
-        setStartups(data);
-        setFilteredStartups(data);
-
-      } catch (err) {
-        console.error("Failed to fetch startups:", err);
-        setError("Unable to load startups. Please try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStartups();
+    loadStartups();
   }, []);
 
-  // Extract unique domains
-  const domains = useMemo(() => {
-    const unique = new Set(startups.map(s => s.domain));
-    return ["all", ...unique];
-  }, [startups]);
-
-  // Filter logic
-  useEffect(() => {
-    let result = startups;
-
-    if (search) {
-      result = result.filter(startup =>
-        startup.name.toLowerCase().includes(search.toLowerCase())
-      );
+  const loadStartups = async () => {
+    try {
+      const data = await getStartups();
+      setStartups(data);
+    } catch (err) {
+      console.error("Failed to fetch startups");
+    } finally {
+      setLoading(false);
     }
+  };
 
-    if (domainFilter !== "all") {
-      result = result.filter(startup => startup.domain === domainFilter);
-    }
-
-    setFilteredStartups(result);
-
-  }, [search, domainFilter, startups]);
-
-  if (loading) {
-    return (
-      <div className="startups-container">
-        <p className="status-text">Loading startups...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="startups-container">
-        <p className="error-text">{error}</p>
-      </div>
-    );
-  }
+  if (loading)
+    return <div className="startup-loading">Loading startups...</div>;
 
   return (
-    <div className="startups-container">
+    <div className="startups-page">
 
-      {/* Header */}
-      <div className="startups-header">
-        <h1>Startups</h1>
-        <p>Discover innovative startups from your network</p>
+      <h1 className="startup-title">
+        Innovation Startups
+      </h1>
+
+      <p className="startup-subtitle">
+        Emerging ventures inside the Renkei ecosystem
+      </p>
+
+      <div className="startup-grid">
+
+        {startups.map((startup) => (
+
+          <Card key={startup.id}>
+
+            <div className="startup-card">
+
+              <h3>{startup.name}</h3>
+
+              <p className="startup-domain">
+                {startup.domain || "General Innovation"}
+              </p>
+
+              <p className="startup-description">
+                {startup.description || "No description available"}
+              </p>
+
+              {/* Innovation Score */}
+              <div className="innovation-section">
+
+                <span>Innovation Score</span>
+
+                <div className="innovation-bar">
+                  <div
+                    className="innovation-fill"
+                    style={{
+                      width: `${startup.innovation_score * 10}%`
+                    }}
+                  />
+                </div>
+
+              </div>
+
+              {/* Meta Info */}
+              <div className="startup-meta">
+
+                <span>
+                  👥 Team: {startup.team_size || "N/A"}
+                </span>
+
+                <span>
+                  🧠 Industry: {startup.industry || "Unknown"}
+                </span>
+
+              </div>
+
+              <div className="startup-links">
+
+                {startup.website && (
+                  <a href={startup.website} target="_blank">
+                    Website
+                  </a>
+                )}
+
+                {startup.github_url && (
+                  <a href={startup.github_url} target="_blank">
+                    GitHub
+                  </a>
+                )}
+
+              </div>
+
+            </div>
+
+          </Card>
+
+        ))}
+
       </div>
-
-      {/* Filters */}
-      <div className="startups-filters">
-
-        <input
-          type="text"
-          placeholder="Search startups..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="search-input"
-        />
-
-        <select
-          value={domainFilter}
-          onChange={(e) => setDomainFilter(e.target.value)}
-          className="filter-select"
-        >
-          {domains.map(domain => (
-            <option key={domain} value={domain}>
-              {domain === "all" ? "All Domains" : domain}
-            </option>
-          ))}
-        </select>
-
-      </div>
-
-      {/* Startups Grid */}
-      {filteredStartups.length === 0 ? (
-        <p className="status-text">No startups found.</p>
-      ) : (
-        <div className="startups-grid">
-          {filteredStartups.map(startup => (
-            <StartupCard
-              key={startup.id}
-              startup={startup}
-            />
-          ))}
-        </div>
-      )}
 
     </div>
   );

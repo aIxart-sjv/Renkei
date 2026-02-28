@@ -1,107 +1,57 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import "./Login.css";
-
-export default function Login() {
-
+import Register from "./pages/Register";
+const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError("");
-
-    if (!form.email || !form.password) {
-      setError("Please fill all fields");
-      return;
+    try {
+      await login(username, password);
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Invalid credentials");
     }
-
-    setLoading(true);
-
-    const result = await login(form.email, form.password);
-
-    setLoading(false);
-
-    if (!result.success) {
-      setError(result.error);
-      return;
-    }
-
-    navigate("/");
   };
 
   return (
     <div className="login-container">
-      <div className="login-card">
+      <form className="login-card" onSubmit={handleSubmit}>
+        <h2>Renkei Login</h2>
 
-        <h1 className="login-title">Renkei</h1>
-        <p className="login-subtitle">Sign in to your account</p>
+        {error && <p className="error">{error}</p>}
 
-        <form onSubmit={handleSubmit} className="login-form">
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
 
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {error && (
-            <div className="error-message">
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className="login-button"
-            disabled={loading}
-          >
-            {loading ? "Signing in..." : "Login"}
-          </button>
-
-          <div style={{ marginTop: "15px", textAlign: "center" }}>
-            <span>Don't have an account? </span>
-            <Link to="/register">Create account</Link>
-          </div>
-
-        </form>
-
-      </div>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <p>
+          Don't have an account?
+          <Link to="/register"> Register</Link>
+        </p>
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
-}
+};
+
+export default Login;

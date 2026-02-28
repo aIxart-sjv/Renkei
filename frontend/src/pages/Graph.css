@@ -1,0 +1,53 @@
+.graph-layout {
+  display: flex;
+  height: 100vh;
+  background: #020617;
+  color: white;
+}
+
+.graph-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.graph-container {
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+
+.graph-header h1 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.graph-header p {
+  margin-top: 6px;
+  color: #94a3b8;
+}
+
+/* GRAPH AREA */
+
+.graph-panel {
+  margin-top: 20px;
+  flex: 1;
+  background: #020617;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  overflow: hidden;
+}
+
+/* LOADING */
+
+.graph-loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 18px;
+}

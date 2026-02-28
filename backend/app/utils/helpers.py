@@ -1,123 +1,232 @@
-from typing import List, Dict, Any
-from datetime import datetime
+import re
+import math
+from typing import List, Dict, Any, Optional
 
 
-# -----------------------------------
-# Convert SQLAlchemy object to dict
-# -----------------------------------
-def model_to_dict(obj) -> Dict[str, Any]:
-    """
-    Converts SQLAlchemy model instance to dictionary
-    """
-    return {
-        column.name: getattr(obj, column.name)
-        for column in obj.__table__.columns
-    }
+# =========================
+# TEXT CLEANING
+# =========================
 
+def clean_text(text: Optional[str]) -> str:
+    """
+    Clean text for ML embedding
+    """
 
-# -----------------------------------
-# Safe join for JSON list fields
-# -----------------------------------
-def safe_join(items: List[str]) -> str:
-    """
-    Safely joins list of strings into single text.
-    Used for similarity matching.
-    """
-    if not items:
-        return ""
-    return " ".join([str(item) for item in items])
-
-
-# -----------------------------------
-# Normalize text for matching
-# -----------------------------------
-def normalize_text(text: str) -> str:
-    """
-    Normalize text for consistent matching.
-    """
     if not text:
         return ""
-    return text.lower().strip()
+
+    # Lowercase
+    text = text.lower()
+
+    # Remove special characters
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+
+    # Remove extra whitespace
+    text = re.sub(r"\s+", " ", text)
+
+    return text.strip()
 
 
-# -----------------------------------
-# Get current UTC timestamp
-# -----------------------------------
-def get_current_timestamp() -> datetime:
+# =========================
+# COMBINE TEXT FIELDS
+# =========================
+
+def combine_text_fields(
+    *fields: Optional[str]
+) -> str:
     """
-    Returns current UTC timestamp
+    Combine multiple text fields safely
     """
-    return datetime.utcnow()
+
+    cleaned_fields = [
+        clean_text(field)
+        for field in fields
+        if field
+    ]
+
+    return " ".join(cleaned_fields)
 
 
-# -----------------------------------
-# Calculate percentage safely
-# -----------------------------------
-def calculate_percentage(part: int, total: int) -> float:
+# =========================
+# NORMALIZE SCORE (0-100)
+# =========================
+
+def normalize_score(
+    value: float,
+    min_value: float,
+    max_value: float
+) -> float:
     """
-    Safe percentage calculation
+    Normalize score between 0 and 100
     """
-    if total == 0:
+
+    if max_value == min_value:
         return 0.0
-    return round((part / total) * 100, 2)
+
+    normalized = (
+        (value - min_value) /
+        (max_value - min_value)
+    ) * 100
+
+    return round(normalized, 4)
 
 
-# -----------------------------------
-# Remove duplicates from list of dicts
-# -----------------------------------
-def remove_duplicates(data: List[Dict], key: str) -> List[Dict]:
+# =========================
+# COSINE SIMILARITY
+# =========================
+
+def cosine_similarity(
+    vec1: List[float],
+    vec2: List[float]
+) -> float:
     """
-    Removes duplicate dictionaries based on key
+    Compute cosine similarity
     """
+
+    if not vec1 or not vec2:
+        return 0.0
+
+    dot_product = sum(
+        a * b for a, b in zip(vec1, vec2)
+    )
+
+    norm1 = math.sqrt(
+        sum(a * a for a in vec1)
+    )
+
+    norm2 = math.sqrt(
+        sum(b * b for b in vec2)
+    )
+
+    if norm1 == 0 or norm2 == 0:
+        return 0.0
+
+    similarity = dot_product / (norm1 * norm2)
+
+    return round(similarity, 6)
+
+
+# =========================
+# SAFE FLOAT CONVERSION
+# =========================
+
+def safe_float(value: Any) -> float:
+    """
+    Convert safely to float
+    """
+
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+# =========================
+# SAFE INT CONVERSION
+# =========================
+
+def safe_int(value: Any) -> int:
+    """
+    Convert safely to int
+    """
+
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
+# =========================
+# DICT SORT BY SCORE
+# =========================
+
+def sort_by_score(
+    items: List[Dict[str, Any]],
+    score_key: str = "score",
+    reverse: bool = True
+) -> List[Dict[str, Any]]:
+    """
+    Sort list of dict by score
+    """
+
+    return sorted(
+        items,
+        key=lambda x: x.get(score_key, 0),
+        reverse=reverse
+    )
+
+
+# =========================
+# TOP K RESULTS
+# =========================
+
+def top_k(
+    items: List[Dict[str, Any]],
+    k: int
+) -> List[Dict[str, Any]]:
+    """
+    Return top k items
+    """
+
+    return items[:k]
+
+
+# =========================
+# REMOVE DUPLICATES
+# =========================
+
+def remove_duplicates(
+    items: List[Dict[str, Any]],
+    key: str
+) -> List[Dict[str, Any]]:
+    """
+    Remove duplicate items by key
+    """
+
     seen = set()
     result = []
 
-    for item in data:
+    for item in items:
+
         value = item.get(key)
+
         if value not in seen:
+
             seen.add(value)
+
             result.append(item)
 
     return result
 
 
-# -----------------------------------
-# Sort list of dicts by key
-# -----------------------------------
-def sort_by_key(data: List[Dict], key: str, reverse: bool = True) -> List[Dict]:
+# =========================
+# BUILD ENTITY LABEL
+# =========================
+
+def build_entity_label(
+    entity_type: str,
+    entity_id: int
+) -> str:
     """
-    Sort dictionaries safely
+    Build graph label
     """
-    return sorted(
-        data,
-        key=lambda x: x.get(key, 0),
-        reverse=reverse
-    )
+
+    return f"{entity_type}:{entity_id}"
 
 
-# -----------------------------------
-# Limit results safely
-# -----------------------------------
-def limit_results(data: List[Any], limit: int = 10) -> List[Any]:
+# =========================
+# SAFE DIVISION
+# =========================
+
+def safe_divide(
+    numerator: float,
+    denominator: float
+) -> float:
     """
-    Limit result size safely
+    Avoid division by zero
     """
-    return data[:limit]
 
+    if denominator == 0:
+        return 0.0
 
-# -----------------------------------
-# Format response wrapper
-# -----------------------------------
-def success_response(message: str, data: Any = None) -> Dict:
-    return {
-        "success": True,
-        "message": message,
-        "data": data
-    }
-
-
-def error_response(message: str) -> Dict:
-    return {
-        "success": False,
-        "message": message
-    }
+    return numerator / denominator

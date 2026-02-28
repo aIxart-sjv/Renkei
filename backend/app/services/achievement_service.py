@@ -1,233 +1,258 @@
 from sqlalchemy.orm import Session
-from typing import List, Dict
+from typing import List, Optional
 
 from app.models.achievement import Achievement
-from app.models.student import Student
+from app.schemas.achievement import (
+    AchievementCreate,
+    AchievementUpdate
+)
+
+from app.core.logger import get_logger
 
 
-class AchievementService:
+logger = get_logger(__name__)
 
-    # -----------------------------------
-    # Create Achievement
-    # -----------------------------------
-    @staticmethod
-    def create_achievement(
-        achievement_data,
-        db: Session
-    ) -> Achievement:
 
-        new_achievement = Achievement(
+# =========================
+# CREATE ACHIEVEMENT
+# =========================
+
+def create_achievement(
+    db: Session,
+    achievement_data: AchievementCreate
+) -> Achievement:
+    """
+    Create new achievement
+    """
+
+    try:
+
+        achievement = Achievement(
+            student_id=achievement_data.student_id,
             title=achievement_data.title,
             description=achievement_data.description,
             category=achievement_data.category,
-            outcome=achievement_data.outcome,
-            technologies_used=achievement_data.technologies_used,
-            event_name=achievement_data.event_name,
-            date=achievement_data.date,
-            student_id=achievement_data.student_id,
+            score=achievement_data.score,
+            rank=achievement_data.rank,
+            position=achievement_data.position,
+            organization=achievement_data.organization,
+            achievement_date=achievement_data.achievement_date
         )
 
-        db.add(new_achievement)
+        db.add(achievement)
         db.commit()
-        db.refresh(new_achievement)
+        db.refresh(achievement)
 
-        return new_achievement
+        logger.info(
+            f"Achievement created: {achievement.id}"
+        )
 
-    # -----------------------------------
-    # Get Achievements for Student
-    # -----------------------------------
-    @staticmethod
-    def get_student_achievements(
-        student_id: int,
-        db: Session
-    ) -> List[Achievement]:
+        return achievement
 
-        return db.query(Achievement).filter(
-            Achievement.student_id == student_id
-        ).order_by(
-            Achievement.created_at.desc()
-        ).all()
+    except Exception as e:
 
-    # -----------------------------------
-    # Delete Achievement
-    # -----------------------------------
-    @staticmethod
-    def delete_achievement(
-        achievement_id: int,
-        db: Session
-    ) -> bool:
+        db.rollback()
 
-        achievement = db.query(Achievement).filter(
-            Achievement.id == achievement_id
-        ).first()
+        logger.error(
+            f"Achievement creation failed: {e}"
+        )
 
-        if not achievement:
-            return False
+        raise
+
+
+# =========================
+# GET ACHIEVEMENT BY ID
+# =========================
+
+def get_achievement(
+    db: Session,
+    achievement_id: int
+) -> Optional[Achievement]:
+    """
+    Get achievement by ID
+    """
+
+    return db.query(Achievement).filter(
+        Achievement.id == achievement_id
+    ).first()
+
+
+# =========================
+# GET STUDENT ACHIEVEMENTS
+# =========================
+
+def get_student_achievements(
+    db: Session,
+    student_id: int
+) -> List[Achievement]:
+    """
+    Get all achievements of a student
+    """
+
+    return db.query(Achievement).filter(
+        Achievement.student_id == student_id
+    ).all()
+
+
+# =========================
+# GET ALL ACHIEVEMENTS
+# =========================
+
+def get_all_achievements(
+    db: Session,
+    skip: int = 0,
+    limit: int = 100
+) -> List[Achievement]:
+    """
+    Get all achievements
+    """
+
+    return db.query(Achievement).offset(skip).limit(limit).all()
+
+
+# =========================
+# UPDATE ACHIEVEMENT
+# =========================
+
+def update_achievement(
+    db: Session,
+    achievement_id: int,
+    update_data: AchievementUpdate
+) -> Optional[Achievement]:
+    """
+    Update achievement
+    """
+
+    achievement = get_achievement(
+        db,
+        achievement_id
+    )
+
+    if not achievement:
+        return None
+
+
+    try:
+
+        update_fields = update_data.dict(
+            exclude_unset=True
+        )
+
+        for field, value in update_fields.items():
+
+            setattr(
+                achievement,
+                field,
+                value
+            )
+
+        db.commit()
+        db.refresh(achievement)
+
+        logger.info(
+            f"Achievement updated: {achievement.id}"
+        )
+
+        return achievement
+
+    except Exception as e:
+
+        db.rollback()
+
+        logger.error(
+            f"Achievement update failed: {e}"
+        )
+
+        raise
+
+
+# =========================
+# DELETE ACHIEVEMENT
+# =========================
+
+def delete_achievement(
+    db: Session,
+    achievement_id: int
+) -> bool:
+    """
+    Delete achievement
+    """
+
+    achievement = get_achievement(
+        db,
+        achievement_id
+    )
+
+    if not achievement:
+        return False
+
+
+    try:
 
         db.delete(achievement)
         db.commit()
 
+        logger.info(
+            f"Achievement deleted: {achievement_id}"
+        )
+
         return True
 
-    # -----------------------------------
-    # Calculate Performance Score
-    # -----------------------------------
-    @staticmethod
-    def calculate_performance_score(
-        student_id: int,
-        db: Session
-    ) -> float:
+    except Exception as e:
 
-        achievements = db.query(Achievement).filter(
-            Achievement.student_id == student_id
-        ).all()
+        db.rollback()
 
-        if not achievements:
-            return 0.0
-
-        score = 0.0
-
-        for ach in achievements:
-
-            # Outcome scoring
-            if ach.outcome:
-
-                outcome = ach.outcome.lower()
-
-                if outcome == "won":
-                    score += 10
-
-                elif outcome == "runner-up":
-                    score += 7
-
-                elif outcome == "participated":
-                    score += 3
-
-                elif outcome in ["lost", "failed"]:
-                    score += 1
-
-            # Tech diversity score
-            if ach.technologies_used:
-                score += len(ach.technologies_used) * 0.5
-
-        return round(score, 2)
-
-    # -----------------------------------
-    # Analyze Performance
-    # -----------------------------------
-    @staticmethod
-    def analyze_performance(
-        student_id: int,
-        db: Session
-    ) -> Dict:
-
-        achievements = db.query(Achievement).filter(
-            Achievement.student_id == student_id
-        ).all()
-
-        total = len(achievements)
-
-        wins = 0
-        runner_ups = 0
-        participations = 0
-        losses = 0
-
-        tech_usage = {}
-
-        for ach in achievements:
-
-            if ach.outcome:
-
-                outcome = ach.outcome.lower()
-
-                if outcome == "won":
-                    wins += 1
-
-                elif outcome == "runner-up":
-                    runner_ups += 1
-
-                elif outcome == "participated":
-                    participations += 1
-
-                elif outcome in ["lost", "failed"]:
-                    losses += 1
-
-            if ach.technologies_used:
-
-                for tech in ach.technologies_used:
-
-                    tech_usage[tech] = tech_usage.get(
-                        tech, 0
-                    ) + 1
-
-        win_rate = (
-            (wins / total) * 100
-            if total > 0 else 0
+        logger.error(
+            f"Achievement deletion failed: {e}"
         )
 
-        most_used_tech = sorted(
-            tech_usage.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
+        raise
 
-        return {
-            "total_achievements": total,
-            "wins": wins,
-            "runner_ups": runner_ups,
-            "participations": participations,
-            "losses": losses,
-            "win_rate_percentage": round(win_rate, 2),
-            "most_used_technologies": most_used_tech[:5],
-        }
 
-    # -----------------------------------
-    # Suggest Improvements
-    # -----------------------------------
-    @staticmethod
-    def suggest_improvements(
-        student_id: int,
-        db: Session
-    ) -> Dict:
+# =========================
+# GET TOP ACHIEVEMENTS
+# =========================
 
-        analysis = AchievementService.analyze_performance(
-            student_id,
-            db
-        )
+def get_top_achievements(
+    db: Session,
+    limit: int = 10
+) -> List[Achievement]:
+    """
+    Get highest scoring achievements
+    """
 
-        suggestions = []
+    return db.query(Achievement)\
+        .order_by(Achievement.score.desc())\
+        .limit(limit)\
+        .all()
 
-        if analysis["total_achievements"] == 0:
 
-            suggestions.append(
-                "Start participating in hackathons and projects."
-            )
+# =========================
+# CALCULATE STUDENT ACHIEVEMENT SCORE
+# =========================
 
-        if analysis["win_rate_percentage"] < 40:
+def calculate_student_achievement_score(
+    db: Session,
+    student_id: int
+) -> float:
+    """
+    Calculate aggregated achievement score
+    Used in ML feature engineering
+    """
 
-            suggestions.append(
-                "Improve problem-solving skills and preparation."
-            )
+    achievements = get_student_achievements(
+        db,
+        student_id
+    )
 
-        if analysis["wins"] == 0:
+    if not achievements:
+        return 0.0
 
-            suggestions.append(
-                "Collaborate with experienced teammates or mentors."
-            )
 
-        if len(analysis["most_used_technologies"]) < 3:
+    total_score = sum(
+        a.score for a in achievements
+    )
 
-            suggestions.append(
-                "Expand your tech stack to increase competitiveness."
-            )
+    avg_score = total_score / len(achievements)
 
-        if not suggestions:
-
-            suggestions.append(
-                "Excellent performance. Continue building advanced projects."
-            )
-
-        return {
-            "analysis": analysis,
-            "suggestions": suggestions
-        }
+    return avg_score

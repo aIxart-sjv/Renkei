@@ -1,0 +1,481 @@
+{
+    "nodes": [
+        {
+            "id": 3,
+            "type": "startup",
+            "innovation_score": 0.0,
+            "pagerank_score": 81.0359604592157,
+            "centrality_score": 0.29308724363262845
+        },
+        {
+            "id": 4,
+            "type": "startup",
+            "innovation_score": 0.0,
+            "pagerank_score": 100.0,
+            "centrality_score": 0.319284905017527
+        },
+        {
+            "id": 5,
+            "type": "startup",
+            "innovation_score": 0.0,
+            "pagerank_score": 81.80434830101152,
+            "centrality_score": 0.3438176168312727
+        },
+        {
+            "id": 6,
+            "type": "startup",
+            "innovation_score": 0.0,
+            "pagerank_score": 65.52428770939441,
+            "centrality_score": 0.27062225338814017
+        },
+        {
+            "id": 7,
+            "type": "alumni",
+            "innovation_score": 28.8754,
+            "pagerank_score": 63.60116879754577,
+            "centrality_score": 0.24320447925627625
+        },
+        {
+            "id": 8,
+            "type": "alumni",
+            "innovation_score": 23.8687,
+            "pagerank_score": 67.98521936422324,
+            "centrality_score": 0.2752743133187774
+        },
+        {
+            "id": 9,
+            "type": "mentor",
+            "innovation_score": 36.13,
+            "pagerank_score": 45.725018150491394,
+            "centrality_score": 0.18028169612725553
+        },
+        {
+            "id": 10,
+            "type": "mentor",
+            "innovation_score": 29.1204,
+            "pagerank_score": 82.24045810563017,
+            "centrality_score": 0.3101427239800337
+        },
+        {
+            "id": 11,
+            "type": "student",
+            "innovation_score": 27.1517,
+            "pagerank_score": 41.466737899377456,
+            "centrality_score": 0.21240865160448033
+        },
+        {
+            "id": 12,
+            "type": "student",
+            "innovation_score": 24.4351,
+            "pagerank_score": 47.80392232213945,
+            "centrality_score": 0.19559696870209947
+        },
+        {
+            "id": 13,
+            "type": "student",
+            "innovation_score": 31.5272,
+            "pagerank_score": 13.065526860929905,
+            "centrality_score": 0.10244535639497014
+        },
+        {
+            "id": 14,
+            "type": "student",
+            "innovation_score": 33.9537,
+            "pagerank_score": 18.11327321046175,
+            "centrality_score": 0.1069347505449291
+        },
+        {
+            "id": 15,
+            "type": "student",
+            "innovation_score": 27.8539,
+            "pagerank_score": 17.703342794714107,
+            "centrality_score": 0.10648113286609526
+        },
+        {
+            "id": 16,
+            "type": "student",
+            "innovation_score": 35.5476,
+            "pagerank_score": 16.176493972113594,
+            "centrality_score": 0.11010964413574142
+        },
+        {
+            "id": 17,
+            "type": "student",
+            "innovation_score": 36.406,
+            "pagerank_score": 64.1956219049871,
+            "centrality_score": 0.2548576482015209
+        },
+        {
+            "id": 18,
+            "type": "student",
+            "innovation_score": 31.5808,
+            "pagerank_score": 15.098070962734964,
+            "centrality_score": 0.10856938144143576
+        },
+        {
+            "id": 19,
+            "type": "student",
+            "innovation_score": 24.1315,
+            "pagerank_score": 34.46264188043178,
+            "centrality_score": 0.17371025537575346
+        },
+        {
+            "id": 20,
+            "type": "student",
+            "innovation_score": 36.6622,
+            "pagerank_score": 59.72847841182437,
+            "centrality_score": 0.2339347230624908
+        },
+        {
+            "id": 21,
+            "type": "student",
+            "innovation_score": 30.4827,
+            "pagerank_score": 13.598308259535491,
+            "centrality_score": 0.0975559673737148
+        },
+        {
+            "id": 22,
+            "type": "student",
+            "innovation_score": 20.2723,
+            "pagerank_score": 17.45101328326731,
+            "centrality_score": 0.10049394237092077
+        },
+        {
+            "id": 23,
+            "type": "student",
+            "innovation_score": 27.2748,
+            "pagerank_score": 29.83621522463464,
+            "centrality_score": 0.14917137806990427
+        },
+        {
+            "id": 1,
+            "type": "startup",
+            "innovation_score": 0.0,
+            "pagerank_score": 94.58639952935329,
+            "centrality_score": 0.3425547060375507
+        },
+        {
+            "id": 2,
+            "type": "startup",
+            "innovation_score": 0.0,
+            "pagerank_score": 86.72198829898782,
+            "centrality_score": 0.3399051297926714
+        },
+        {
+            "id": 24,
+            "type": "student",
+            "innovation_score": 34.9361,
+            "pagerank_score": 35.41001104442584,
+            "centrality_score": 0.2092119310537025
+        },
+        {
+            "id": 25,
+            "type": "student",
+            "innovation_score": 30.2715,
+            "pagerank_score": 16.49843431928588,
+            "centrality_score": 0.10125077023126532
+        }
+    ],
+    "edges": [
+        {
+            "source": 3,
+            "target": 9,
+            "strength": 0.9037336798679645,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 3,
+            "target": 21,
+            "strength": 0.39180602862082997,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 3,
+            "target": 17,
+            "strength": 0.8969623469811416,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 3,
+            "target": 3,
+            "strength": 0.3191804249889025,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 3,
+            "target": 24,
+            "strength": 0.3816079068806176,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 3,
+            "target": 4,
+            "strength": 0.8676227015011921,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 3,
+            "target": 12,
+            "strength": 0.4961794575526065,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 4,
+            "target": 14,
+            "strength": 0.6520217087727349,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 4,
+            "target": 15,
+            "strength": 0.6273969856784853,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 4,
+            "target": 4,
+            "strength": 0.3764113690923273,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 4,
+            "target": 20,
+            "strength": 0.7363742360885294,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 4,
+            "target": 23,
+            "strength": 0.9808617250591334,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 4,
+            "target": 2,
+            "strength": 0.8655308005847719,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 5,
+            "target": 8,
+            "strength": 0.5038930148853561,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 5,
+            "target": 6,
+            "strength": 0.34361429075664696,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 5,
+            "target": 7,
+            "strength": 0.7270622032358901,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 5,
+            "target": 19,
+            "strength": 0.3154247299609143,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 5,
+            "target": 9,
+            "strength": 0.9839070672738572,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 5,
+            "target": 1,
+            "strength": 0.895584415154927,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 5,
+            "target": 17,
+            "strength": 0.5629831513467549,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 5,
+            "target": 2,
+            "strength": 0.4887295415768892,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 6,
+            "target": 1,
+            "strength": 0.6836313622418823,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 6,
+            "target": 11,
+            "strength": 0.7066982890363828,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 6,
+            "target": 22,
+            "strength": 0.6133985640822548,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 6,
+            "target": 23,
+            "strength": 0.3760735812893026,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 6,
+            "target": 8,
+            "strength": 0.6286159746225501,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 7,
+            "target": 11,
+            "strength": 0.4821929577897712,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 7,
+            "target": 1,
+            "strength": 0.8004676293322184,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 7,
+            "target": 20,
+            "strength": 0.9325085843305021,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 7,
+            "target": 12,
+            "strength": 0.7247237321232082,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 8,
+            "target": 2,
+            "strength": 0.9163845024482031,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 8,
+            "target": 10,
+            "strength": 0.43182968502333996,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 8,
+            "target": 19,
+            "strength": 0.9016485555569576,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 8,
+            "target": 17,
+            "strength": 0.5350042159479094,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 9,
+            "target": 19,
+            "strength": 0.5982524435494956,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 10,
+            "target": 12,
+            "strength": 0.9321068816075451,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 10,
+            "target": 2,
+            "strength": 0.8520091998293862,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 10,
+            "target": 1,
+            "strength": 0.40592157146500096,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 10,
+            "target": 13,
+            "strength": 0.3755766675850827,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 10,
+            "target": 24,
+            "strength": 0.627341817093562,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 10,
+            "target": 20,
+            "strength": 0.8968148225573005,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 11,
+            "target": 2,
+            "strength": 0.6695800866242345,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 11,
+            "target": 24,
+            "strength": 0.33510098417030243,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 12,
+            "target": 24,
+            "strength": 0.43987937913115044,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 16,
+            "target": 1,
+            "strength": 0.563453073049753,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 17,
+            "target": 25,
+            "strength": 0.5809071951883042,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 17,
+            "target": 2,
+            "strength": 0.8549645641923072,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 18,
+            "target": 1,
+            "strength": 0.49531278608043416,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 20,
+            "target": 1,
+            "strength": 0.796009279100139,
+            "connection_type": "collaboration"
+        },
+        {
+            "source": 1,
+            "target": 2,
+            "strength": 0.4396461871510691,
+            "connection_type": "collaboration"
+        }
+    ]
+}

@@ -1,243 +1,232 @@
-import networkx as nx
 from sqlalchemy.orm import Session
-from typing import Dict, List
+from typing import Dict, List, Any
+
+from app.core.logger import get_logger
 
 from app.models.student import Student
-from app.models.connection import Connection
-from app.models.achievement import Achievement
+from app.models.mentor import Mentor
+from app.models.alumni import Alumni
 from app.models.startup import Startup
+from app.models.connection import Connection
+
+from app.graph.builder import build_graph
+from app.graph.centrality import composite_centrality_score
+from app.graph.pagerank import compute_pagerank, normalize_pagerank
+from app.graph.algorithms import compute_collaboration_score
 
 
-class GraphService:
+logger = get_logger(__name__)
 
-    # -----------------------------------
-    # Build Graph from Database
-    # -----------------------------------
-    @staticmethod
-    def build_graph(db: Session) -> nx.Graph:
-        """
-        Builds the campus innovation graph
 
-        Nodes:
-            - Students
+# =========================
+# BUILD FULL GRAPH
+# =========================
 
-        Edges:
-            - Explicit connections
-            - Achievement collaborations
-            - Startup founder collaborations
-        """
+def get_graph(db: Session):
+    """
+    Build graph from database
+    """
 
-        G = nx.Graph()
+    graph = build_graph(db)
 
-        # -----------------------------
-        # Add student nodes
-        # -----------------------------
-        students = db.query(Student).all()
+    return graph
 
-        for student in students:
-            G.add_node(
-                student.id,
-                type="student",
-                name=student.name
-            )
 
-        # -----------------------------
-        # Add explicit connections
-        # -----------------------------
-        connections = db.query(Connection).all()
+# =========================
+# GET GRAPH DATA FOR FRONTEND
+# =========================
 
-        for conn in connections:
-            G.add_edge(
-                conn.source_id,
-                conn.target_id,
-                type="connection"
-            )
+def get_graph_data(
+    db: Session
+) -> Dict[str, List[Dict[str, Any]]]:
+    """
+    Return graph nodes and edges
+    """
 
-        # -----------------------------
-        # Add achievement collaborations
-        # -----------------------------
-        achievements = db.query(Achievement).all()
+    graph = build_graph(db)
 
-        event_map = {}
+    pagerank_scores = normalize_pagerank(
+        compute_pagerank(graph)
+    )
 
-        for ach in achievements:
-            if ach.event_name:
-                event_map.setdefault(
-                    ach.event_name,
-                    []
-                ).append(ach.student_id)
+    centrality_scores = composite_centrality_score(graph)
 
-        for event, participants in event_map.items():
-            for i in range(len(participants)):
-                for j in range(i + 1, len(participants)):
-                    G.add_edge(
-                        participants[i],
-                        participants[j],
-                        type="achievement"
-                    )
+    nodes = []
+    edges = []
 
-        # -----------------------------
-        # Add startup collaborations
-        # -----------------------------
-        startups = db.query(Startup).all()
 
-        for startup in startups:
+    # Add nodes
+    for node_id, data in graph.nodes(data=True):
 
-            if startup.founders:
+        nodes.append({
+            "id": node_id,
+            "type": data.get("type"),
+            "innovation_score": data.get("innovation_score", 0.0),
+            "pagerank_score": pagerank_scores.get(node_id, 0.0),
+            "centrality_score": centrality_scores.get(node_id, 0.0)
+        })
 
-                founders = startup.founders
 
-                for i in range(len(founders)):
-                    for j in range(i + 1, len(founders)):
+    # Add edges
+    for source, target, data in graph.edges(data=True):
 
-                        G.add_edge(
-                            founders[i],
-                            founders[j],
-                            type="startup"
-                        )
+        edges.append({
+            "source": source,
+            "target": target,
+            "connection_type": data.get("connection_type"),
+            "strength": data.get("weight", 1.0)
+        })
 
-        return G
 
-    # -----------------------------------
-    # Calculate Innovation Scores
-    # -----------------------------------
-    @staticmethod
-    def calculate_innovation_scores(
-        db: Session
-    ) -> Dict[int, float]:
+    return {
+        "nodes": nodes,
+        "edges": edges
+    }
 
-        G = GraphService.build_graph(db)
 
-        if len(G.nodes) == 0:
-            return {}
+# =========================
+# GET INNOVATION SCORES
+# =========================
 
-        degree = nx.degree_centrality(G)
+def get_innovation_scores(
+    db: Session
+) -> List[Dict[str, Any]]:
+    """
+    Get innovation scores for all entities
+    """
 
-        betweenness = nx.betweenness_centrality(G)
+    graph = build_graph(db)
 
-        closeness = nx.closeness_centrality(G)
+    pagerank_scores = normalize_pagerank(
+        compute_pagerank(graph)
+    )
 
-        scores = {}
+    centrality_scores = composite_centrality_score(graph)
 
-        for node in G.nodes():
+    results = []
 
-            score = (
-                0.4 * degree.get(node, 0) +
-                0.4 * betweenness.get(node, 0) +
-                0.2 * closeness.get(node, 0)
-            )
+    for node_id, data in graph.nodes(data=True):
 
-            scores[node] = round(score, 4)
+        results.append({
+            "entity_id": node_id,
+            "entity_type": data.get("type"),
+            "innovation_score": data.get("innovation_score", 0.0),
+            "pagerank_score": pagerank_scores.get(node_id, 0.0),
+            "centrality_score": centrality_scores.get(node_id, 0.0)
+        })
 
-        return scores
+    return results
 
-    # -----------------------------------
-    # Get Top Innovators
-    # -----------------------------------
-    @staticmethod
-    def get_top_innovators(
-        db: Session,
-        limit: int = 10
-    ) -> List[Dict]:
 
-        scores = GraphService.calculate_innovation_scores(db)
+# =========================
+# GET TOP INNOVATORS
+# =========================
 
-        if not scores:
-            return []
+def get_top_innovators(
+    db: Session,
+    limit: int = 10
+) -> List[Dict[str, Any]]:
+    """
+    Rank entities by innovation score
+    """
 
-        sorted_scores = sorted(
-            scores.items(),
-            key=lambda x: x[1],
-            reverse=True
+    scores = get_innovation_scores(db)
+
+    scores.sort(
+        key=lambda x: x["innovation_score"],
+        reverse=True
+    )
+
+    return scores[:limit]
+
+
+# =========================
+# GET COLLABORATION SCORE
+# =========================
+
+def get_collaboration_score(
+    db: Session,
+    entity_id: int
+) -> float:
+    """
+    Get collaboration score of entity
+    """
+
+    graph = build_graph(db)
+
+    score = compute_collaboration_score(
+        graph,
+        entity_id
+    )
+
+    return score
+
+
+# =========================
+# GET ENTITY NEIGHBORS
+# =========================
+
+def get_neighbors(
+    db: Session,
+    entity_id: int
+) -> List[Dict[str, Any]]:
+    """
+    Get connected entities
+    """
+
+    graph = build_graph(db)
+
+    neighbors = []
+
+    if entity_id not in graph:
+        return neighbors
+
+
+    for neighbor in graph.neighbors(entity_id):
+
+        neighbors.append({
+            "entity_id": neighbor,
+            "entity_type": graph.nodes[neighbor].get("type")
+        })
+
+    return neighbors
+
+
+# =========================
+# GET ENTITY DEGREE
+# =========================
+
+def get_entity_degree(
+    db: Session,
+    entity_id: int
+) -> int:
+
+    graph = build_graph(db)
+
+    if entity_id not in graph:
+        return 0
+
+    return graph.degree(entity_id)
+
+
+# =========================
+# GET GRAPH SUMMARY
+# =========================
+
+def get_graph_summary(
+    db: Session
+) -> Dict[str, Any]:
+    """
+    Graph overview stats
+    """
+
+    graph = build_graph(db)
+
+    return {
+        "total_nodes": graph.number_of_nodes(),
+        "total_edges": graph.number_of_edges(),
+        "density": (
+            graph.number_of_edges() /
+            max(graph.number_of_nodes(), 1)
         )
-
-        students = db.query(Student).all()
-
-        student_map = {
-            s.id: s.name for s in students
-        }
-
-        results = []
-
-        for student_id, score in sorted_scores[:limit]:
-
-            results.append({
-                "student_id": student_id,
-                "name": student_map.get(student_id),
-                "innovation_score": score
-            })
-
-        return results
-
-    # -----------------------------------
-    # Collaboration Score
-    # -----------------------------------
-    @staticmethod
-    def get_collaboration_score(
-        student_id: int,
-        db: Session
-    ) -> float:
-
-        G = GraphService.build_graph(db)
-
-        if student_id not in G:
-            return 0.0
-
-        return float(G.degree(student_id))
-
-    # -----------------------------------
-    # Graph data for frontend visualization
-    # -----------------------------------
-    @staticmethod
-    def get_graph_data(db: Session):
-
-        G = GraphService.build_graph(db)
-
-        nodes = []
-        edges = []
-
-        for node_id, data in G.nodes(data=True):
-
-            nodes.append({
-                "id": node_id,
-                "name": data.get("name"),
-                "type": data.get("type")
-            })
-
-        for source, target, data in G.edges(data=True):
-
-            edges.append({
-                "source": source,
-                "target": target,
-                "type": data.get("type")
-            })
-
-        return {
-            "nodes": nodes,
-            "edges": edges
-        }
-
-    # -----------------------------------
-    # Update DB innovation scores
-    # -----------------------------------
-    @staticmethod
-    def update_student_innovation_scores(
-        db: Session
-    ):
-
-        scores = GraphService.calculate_innovation_scores(db)
-
-        for student_id, score in scores.items():
-
-            student = db.query(Student).filter(
-                Student.id == student_id
-            ).first()
-
-            if student:
-                student.innovation_score = score
-
-        db.commit()
-
-        return {
-            "message": "Innovation scores updated successfully"
-        }
+    }

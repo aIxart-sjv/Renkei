@@ -3,71 +3,89 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: radial-gradient(
+    circle at top,
+    #020617,
+    #000000
+  );
+  color: white;
 }
+
+/* CARD */
 
 .login-card {
-  background: #ffffff;
-  padding: 32px;
-  border-radius: 12px;
   width: 380px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  padding: 40px;
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
 }
 
+/* TITLE */
+
 .login-title {
-  margin: 0;
-  font-size: 28px;
-  font-weight: bold;
   text-align: center;
+  font-size: 32px;
+  font-weight: 700;
 }
 
 .login-subtitle {
   text-align: center;
-  color: #666;
-  margin-bottom: 24px;
+  color: #94a3b8;
+  margin-bottom: 30px;
 }
 
-.login-form {
+/* FORM */
+
+.login-card form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
+.login-card input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #1e293b;
+  background: #020617;
+  color: white;
+  outline: none;
 }
 
-.form-group label {
-  font-size: 14px;
-  margin-bottom: 6px;
+.login-card input:focus {
+  border-color: #3b82f6;
 }
 
-.form-group input {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
+/* BUTTON */
 
-.login-button {
+.login-card button {
+  margin-top: 10px;
   padding: 12px;
   border: none;
+  border-radius: 8px;
   background: #2563eb;
   color: white;
-  font-weight: bold;
-  border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
+  transition: 0.2s;
 }
 
-.login-button:hover {
+.login-card button:hover {
   background: #1d4ed8;
 }
 
-.login-button:disabled {
-  background: #9ca3af;
+.login-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.error-message {
-  color: red;
+/* ERROR */
+
+.login-error {
+  background: rgba(255,0,0,0.15);
+  border: 1px solid rgba(255,0,0,0.3);
+  padding: 10px;
+  border-radius: 6px;
   font-size: 14px;
 }

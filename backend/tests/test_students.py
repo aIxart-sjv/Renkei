@@ -1,219 +1,292 @@
-import sys
-import os
+"""
+Student Service Tests
 
-# Add backend directory to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+Run with:
+    pytest tests/test_students.py -v
+"""
 
-from app.database import SessionLocal
+import pytest
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from app.db.base import Base
+
+from app.models.user import User, UserRole
 from app.models.student import Student
 
+from app.schemas.student import (
+    StudentCreate,
+    StudentUpdate
+)
 
-def seed_student_test_data(db):
-    """
-    Seed database with student test data
-    """
+from app.services.student_service import (
+    create_student,
+    get_student,
+    get_student_by_user,
+    update_student,
+    delete_student,
+    get_all_students,
+    get_top_students,
+    search_students_by_skill
+)
 
-    if db.query(Student).count() > 0:
-        print("Student test data already exists.")
-        return
+from app.services.ml_service import get_entity_embedding
 
-    print("Seeding student test data...")
+from app.core.security import hash_password
 
-    student1 = Student(
-        name="Test Student 1",
-        email="student1@test.com",
-        skills=["Python", "FastAPI"],
-        interests=["AI", "Startups"],
-        bio="Backend developer interested in AI."
+
+# =========================
+# TEST DATABASE SETUP
+# =========================
+
+SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
+
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"check_same_thread": False}
+)
+
+TestingSessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
+
+@pytest.fixture(scope="function")
+def db():
+
+    Base.metadata.create_all(bind=engine)
+
+    session = TestingSessionLocal()
+
+    yield session
+
+    session.close()
+
+    Base.metadata.drop_all(bind=engine)
+
+
+# =========================
+# CREATE TEST USER
+# =========================
+
+def create_test_user(db):
+
+    user = User(
+        email="student@test.com",
+        username="studentuser",
+        hashed_password=hash_password("password"),
+        role=UserRole.student,
+        full_name="Test Student"
     )
 
-    student2 = Student(
-        name="Test Student 2",
-        email="student2@test.com",
-        skills=["React", "JavaScript"],
-        interests=["Web Development", "UI/UX"],
-        bio="Frontend developer."
-    )
-
-    db.add_all([student1, student2])
+    db.add(user)
     db.commit()
 
-    print("Student test data seeded.")
+    return user
 
 
-# -----------------------------------
-# Test Create Student
-# -----------------------------------
-def test_create_student():
-    db = SessionLocal()
+# =========================
+# TEST CREATE STUDENT
+# =========================
 
-    try:
-        print("\nTesting student creation...")
+def test_create_student(db):
 
-        new_student = Student(
-            name="New Test Student",
-            email="newstudent@test.com",
-            skills=["Machine Learning"],
-            interests=["AI"],
-            bio="ML enthusiast"
+    user = create_test_user(db)
+
+    student_data = StudentCreate(
+        user_id=user.id,
+        university="Test University",
+        degree="B.Tech",
+        field_of_study="Computer Science",
+        graduation_year=2026,
+        skills="Python, AI",
+        interests="Machine Learning",
+        bio="AI student",
+        is_active=True
+    )
+
+    student = create_student(
+        db,
+        student_data
+    )
+
+    assert student is not None
+    assert student.user_id == user.id
+    assert student.skills == "Python, AI"
+
+    # Verify embedding created
+    embedding = get_entity_embedding(
+        db,
+        student.id,
+        "student"
+    )
+
+    assert embedding is not None
+    assert len(embedding) > 0
+
+
+# =========================
+# TEST GET STUDENT
+# =========================
+
+def test_get_student(db):
+
+    user = create_test_user(db)
+
+    student_data = StudentCreate(
+        user_id=user.id,
+        university="Test University"
+    )
+
+    student = create_student(db, student_data)
+
+    result = get_student(
+        db,
+        student.id
+    )
+
+    assert result is not None
+    assert result.id == student.id
+
+
+# =========================
+# TEST GET STUDENT BY USER
+# =========================
+
+def test_get_student_by_user(db):
+
+    user = create_test_user(db)
+
+    student = create_student(
+        db,
+        StudentCreate(user_id=user.id)
+    )
+
+    result = get_student_by_user(
+        db,
+        user.id
+    )
+
+    assert result is not None
+    assert result.user_id == user.id
+
+
+# =========================
+# TEST UPDATE STUDENT
+# =========================
+
+def test_update_student(db):
+
+    user = create_test_user(db)
+
+    student = create_student(
+        db,
+        StudentCreate(user_id=user.id)
+    )
+
+    update_data = StudentUpdate(
+        skills="Python, Machine Learning"
+    )
+
+    updated = update_student(
+        db,
+        student.id,
+        update_data
+    )
+
+    assert updated.skills == "Python, Machine Learning"
+
+
+# =========================
+# TEST DELETE STUDENT
+# =========================
+
+def test_delete_student(db):
+
+    user = create_test_user(db)
+
+    student = create_student(
+        db,
+        StudentCreate(user_id=user.id)
+    )
+
+    result = delete_student(
+        db,
+        student.id
+    )
+
+    assert result is True
+
+    deleted = get_student(
+        db,
+        student.id
+    )
+
+    assert deleted is None
+
+
+# =========================
+# TEST GET ALL STUDENTS
+# =========================
+
+def test_get_all_students(db):
+
+    user = create_test_user(db)
+
+    create_student(
+        db,
+        StudentCreate(user_id=user.id)
+    )
+
+    students = get_all_students(db)
+
+    assert len(students) >= 1
+
+
+# =========================
+# TEST GET TOP STUDENTS
+# =========================
+
+def test_get_top_students(db):
+
+    user = create_test_user(db)
+
+    student = create_student(
+        db,
+        StudentCreate(
+            user_id=user.id,
+            skills="Python"
         )
+    )
 
-        db.add(new_student)
-        db.commit()
-        db.refresh(new_student)
+    top_students = get_top_students(db)
 
-        print("Created student:", new_student.id, new_student.name)
-
-    finally:
-        db.close()
+    assert top_students is not None
+    assert len(top_students) >= 1
 
 
-# -----------------------------------
-# Test Get All Students
-# -----------------------------------
-def test_get_all_students():
-    db = SessionLocal()
+# =========================
+# TEST SEARCH STUDENTS
+# =========================
 
-    try:
-        print("\nTesting get all students...")
+def test_search_students_by_skill(db):
 
-        students = db.query(Student).all()
+    user = create_test_user(db)
 
-        for student in students:
-            print({
-                "id": student.id,
-                "name": student.name,
-                "email": student.email,
-                "skills": student.skills,
-                "interests": student.interests
-            })
+    create_student(
+        db,
+        StudentCreate(
+            user_id=user.id,
+            skills="Python"
+        )
+    )
 
-    finally:
-        db.close()
+    results = search_students_by_skill(
+        db,
+        "Python"
+    )
 
-
-# -----------------------------------
-# Test Get Student by ID
-# -----------------------------------
-def test_get_student_by_id():
-    db = SessionLocal()
-
-    try:
-        print("\nTesting get student by ID...")
-
-        student = db.query(Student).first()
-
-        if student:
-            print({
-                "id": student.id,
-                "name": student.name,
-                "email": student.email
-            })
-        else:
-            print("No student found.")
-
-    finally:
-        db.close()
-
-
-# -----------------------------------
-# Test Update Student
-# -----------------------------------
-def test_update_student():
-    db = SessionLocal()
-
-    try:
-        print("\nTesting update student...")
-
-        student = db.query(Student).first()
-
-        if student:
-            student.bio = "Updated bio for testing."
-            db.commit()
-            db.refresh(student)
-
-            print("Updated student bio:", student.bio)
-
-        else:
-            print("No student found.")
-
-    finally:
-        db.close()
-
-
-# -----------------------------------
-# Test Delete Student
-# -----------------------------------
-def test_delete_student():
-    db = SessionLocal()
-
-    try:
-        print("\nTesting delete student...")
-
-        student = db.query(Student).filter(
-            Student.email == "newstudent@test.com"
-        ).first()
-
-        if student:
-            db.delete(student)
-            db.commit()
-            print("Deleted student:", student.email)
-        else:
-            print("Student not found.")
-
-    finally:
-        db.close()
-
-
-# -----------------------------------
-# Test Search Students by Skill
-# -----------------------------------
-def test_search_students():
-    db = SessionLocal()
-
-    try:
-        print("\nTesting student search...")
-
-        query = "Python"
-
-        students = db.query(Student).all()
-
-        results = [
-            student for student in students
-            if query.lower() in " ".join(student.skills).lower()
-            or query.lower() in " ".join(student.interests).lower()
-        ]
-
-        print(f"Search results for '{query}':")
-
-        for student in results:
-            print({
-                "id": student.id,
-                "name": student.name,
-                "skills": student.skills,
-                "interests": student.interests
-            })
-
-    finally:
-        db.close()
-
-
-# -----------------------------------
-# Run All Tests
-# -----------------------------------
-if __name__ == "__main__":
-
-    print("=== TESTING STUDENT MODEL ===")
-
-    db = SessionLocal()
-    seed_student_test_data(db)
-    db.close()
-
-    test_create_student()
-    test_get_all_students()
-    test_get_student_by_id()
-    test_update_student()
-    test_search_students()
-    test_delete_student()
-
-    print("\n=== STUDENT TEST COMPLETE ===")
+    assert len(results) >= 1

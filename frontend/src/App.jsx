@@ -1,92 +1,144 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import "./App.css"
 
-import { AuthContext } from "./context/AuthContext";
-
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import Recommendations from "./pages/Recommendations";
-import Startups from "./pages/Startups";
-import Network from "./pages/Network";
-import Login from "./pages/Login";
+// Pages
+import Login from "./pages/Login"
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard"
+import Students from "./pages/Students"
+import Mentors from "./pages/Mentors"
+import Startups from "./pages/Startups"
+import Graph from "./pages/Graph"
+import Recommendations from "./pages/Recommendations"
 
-const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
+// Layout components (we'll create later)
+import Navbar from "./components/common/Navbar"
+import Sidebar from "./components/common/Sidebar"
 
-  if (loading) {
-    return <div style={styles.center}>Loading...</div>;
-  }
-
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
-};
-
-export default function App() {
+// Simple layout wrapper
+function Layout({ children }) {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
+    <div className="app-container">
 
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        }
-      />
+      <Sidebar />
 
-      <Route
-        path="/recommendations"
-        element={
-          <ProtectedRoute>
-            <Recommendations />
-          </ProtectedRoute>
-        }
-      />
+      <div className="main-section">
 
-      <Route
-        path="/startups"
-        element={
-          <ProtectedRoute>
-            <Startups />
-          </ProtectedRoute>
-        }
-      />
+        <Navbar />
 
-      <Route
-        path="/network"
-        element={
-          <ProtectedRoute>
-            <Network />
-          </ProtectedRoute>
-        }
-      />
+        <div className="content">
+          {children}
+        </div>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
-  );
+      </div>
+
+    </div>
+  )
 }
 
-const styles = {
-  center: {
-    display: "flex",
-    height: "100vh",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    fontFamily: "Arial, sans-serif",
-  },
-};
+// Protected route
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("token")
+
+  if (!token) {
+    return <Navigate to="/" replace />
+  }
+
+  return children
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+
+      <Routes>
+
+        {/* Public route */}
+        <Route path="/" element={<Login />} />
+
+        {/* Protected routes */}
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/students"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Students />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/mentors"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Mentors />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/startups"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Startups />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/graph"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Graph />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/recommendations"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Recommendations />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+      </Routes>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App

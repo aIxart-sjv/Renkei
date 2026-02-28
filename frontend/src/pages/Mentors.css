@@ -1,0 +1,92 @@
+.mentors-page {
+  padding: 30px;
+  color: white;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* GRID */
+
+.mentor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* CARD CONTENT */
+
+.mentor-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* HEADER */
+
+.mentor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mentor-domain {
+  background: #1e293b;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* BIO */
+
+.mentor-bio {
+  color: #cbd5f5;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* META */
+
+.mentor-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.mentor-meta strong {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.mentor-meta p {
+  font-size: 14px;
+}
+
+/* BUTTON */
+
+.connect-btn {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.connect-btn:hover {
+  background: #1d4ed8;
+}
+
+/* LOADING */
+
+.mentor-loading {
+  padding: 40px;
+  color: white;
+}

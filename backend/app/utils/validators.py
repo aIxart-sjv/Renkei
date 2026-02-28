@@ -1,169 +1,245 @@
 import re
-from typing import List, Any
+from typing import Optional, List
 
 
-# -----------------------------------
-# Email Validator
-# -----------------------------------
+# =========================
+# EMAIL VALIDATOR
+# =========================
+
+EMAIL_REGEX = re.compile(
+    r"^[\w\.-]+@[\w\.-]+\.\w+$"
+)
+
+
 def validate_email(email: str) -> bool:
     """
-    Validates email format
+    Validate email format
     """
+
     if not email:
         return False
 
-    pattern = r"^[\w\.-]+@[\w\.-]+\.\w+$"
-    return re.match(pattern, email) is not None
+    return bool(
+        EMAIL_REGEX.match(email)
+    )
 
 
-# -----------------------------------
-# Password Validator
-# -----------------------------------
+# =========================
+# USERNAME VALIDATOR
+# =========================
+
+USERNAME_REGEX = re.compile(
+    r"^[a-zA-Z0-9_\-]{3,100}$"
+)
+
+
+def validate_username(username: str) -> bool:
+    """
+    Validate username format
+    """
+
+    if not username:
+        return False
+
+    return bool(
+        USERNAME_REGEX.match(username)
+    )
+
+
+# =========================
+# PASSWORD VALIDATOR
+# =========================
+
 def validate_password(password: str) -> bool:
     """
-    Password must contain:
-    - Minimum 8 characters
-    - One uppercase letter
-    - One lowercase letter
-    - One number
+    Basic password validation
     """
-    if not password or len(password) < 8:
+
+    if not password:
         return False
 
-    if not re.search(r"[A-Z]", password):
-        return False
-
-    if not re.search(r"[a-z]", password):
-        return False
-
-    if not re.search(r"\d", password):
+    if len(password) < 6:
         return False
 
     return True
 
 
-# -----------------------------------
-# Name Validator
-# -----------------------------------
-def validate_name(name: str) -> bool:
+# =========================
+# ENTITY TYPE VALIDATOR
+# =========================
+
+VALID_ENTITY_TYPES = {
+    "student",
+    "mentor",
+    "alumni",
+    "startup"
+}
+
+
+def validate_entity_type(entity_type: str) -> bool:
+
+    return entity_type in VALID_ENTITY_TYPES
+
+
+# =========================
+# CONNECTION TYPE VALIDATOR
+# =========================
+
+VALID_CONNECTION_TYPES = {
+    "mentorship",
+    "collaboration",
+    "startup_member",
+    "startup_founder",
+    "advisor"
+}
+
+
+def validate_connection_type(
+    connection_type: str
+) -> bool:
+
+    return connection_type in VALID_CONNECTION_TYPES
+
+
+# =========================
+# SCORE VALIDATOR
+# =========================
+
+def validate_score(
+    score: Optional[float],
+    min_value: float = 0.0,
+    max_value: float = 100.0
+) -> bool:
     """
-    Validates person name
+    Validate score range
     """
-    if not name:
+
+    if score is None:
         return False
 
-    name = name.strip()
-
-    return len(name) >= 2 and len(name) <= 100
+    return min_value <= score <= max_value
 
 
-# -----------------------------------
-# Skills / Interests Validator
-# -----------------------------------
-def validate_list_field(field: List[str], min_items: int = 1, max_items: int = 50) -> bool:
+# =========================
+# VECTOR VALIDATOR
+# =========================
+
+def validate_vector(
+    vector: Optional[List[float]],
+    expected_dim: Optional[int] = None
+) -> bool:
     """
-    Validates skills, interests, expertise, tech stack lists
+    Validate ML embedding vector
     """
-    if not isinstance(field, list):
+
+    if not vector:
         return False
 
-    if len(field) < min_items or len(field) > max_items:
+    if not isinstance(vector, list):
         return False
 
-    for item in field:
-        if not isinstance(item, str):
-            return False
+    if expected_dim and len(vector) != expected_dim:
+        return False
 
-        if len(item.strip()) == 0:
-            return False
+    return all(
+        isinstance(x, (float, int))
+        for x in vector
+    )
 
-    return True
 
+# =========================
+# TEXT VALIDATOR
+# =========================
 
-# -----------------------------------
-# URL Validator
-# -----------------------------------
-def validate_url(url: str) -> bool:
+def validate_text(
+    text: Optional[str],
+    min_length: int = 0,
+    max_length: int = 5000
+) -> bool:
     """
-    Validates URL format
+    Validate text field
     """
+
+    if text is None:
+        return False
+
+    length = len(text)
+
+    return min_length <= length <= max_length
+
+
+# =========================
+# URL VALIDATOR
+# =========================
+
+URL_REGEX = re.compile(
+    r"^(https?:\/\/)?"
+    r"([\w\-])+\.{1}"
+    r"([a-zA-Z]{2,63})"
+    r"([\w\-\._~:/?#[\]@!$&'()*+,;=]*)$"
+)
+
+
+def validate_url(
+    url: Optional[str]
+) -> bool:
+
     if not url:
+        return True
+
+    return bool(
+        URL_REGEX.match(url)
+    )
+
+
+# =========================
+# SKILLS VALIDATOR
+# =========================
+
+def validate_skills(
+    skills: Optional[str]
+) -> bool:
+    """
+    Validate skills text
+    """
+
+    if not skills:
         return False
 
-    pattern = r"^(https?:\/\/)?([\w\-])+\.{1}([a-zA-Z]{2,63})([\/\w\.-]*)*\/?$"
-    return re.match(pattern, url) is not None
-
-
-# -----------------------------------
-# Numeric Validator
-# -----------------------------------
-def validate_positive_number(value: Any) -> bool:
-    """
-    Validates positive numeric values
-    """
-    try:
-        return float(value) >= 0
-    except (ValueError, TypeError):
+    if len(skills) > 2000:
         return False
 
-
-# -----------------------------------
-# ID Validator
-# -----------------------------------
-def validate_id(value: Any) -> bool:
-    """
-    Validates database IDs
-    """
-    try:
-        return int(value) > 0
-    except (ValueError, TypeError):
-        return False
+    return True
 
 
-# -----------------------------------
-# Text Length Validator
-# -----------------------------------
-def validate_text_length(text: str, min_length: int = 0, max_length: int = 1000) -> bool:
-    """
-    Validates text field length
-    """
-    if not isinstance(text, str):
-        return False
+# =========================
+# LIST VALIDATOR
+# =========================
 
-    return min_length <= len(text.strip()) <= max_length
+def validate_non_empty_list(
+    items: Optional[List]
+) -> bool:
+
+    return isinstance(items, list) and len(items) > 0
 
 
-# -----------------------------------
-# Startup Stage Validator
-# -----------------------------------
-VALID_STARTUP_STAGES = [
-    "Ideation",
-    "Prototype",
-    "MVP",
-    "Early Revenue",
-    "Growth",
-    "Scaling"
-]
+# =========================
+# POSITIVE INTEGER VALIDATOR
+# =========================
+
+def validate_positive_int(
+    value: Optional[int]
+) -> bool:
+
+    return isinstance(value, int) and value >= 0
 
 
-def validate_startup_stage(stage: str) -> bool:
-    """
-    Validates startup stage
-    """
-    return stage in VALID_STARTUP_STAGES
+# =========================
+# SAFE ENTITY ID VALIDATOR
+# =========================
 
+def validate_entity_id(
+    entity_id: Optional[int]
+) -> bool:
 
-# -----------------------------------
-# Generic Required Field Validator
-# -----------------------------------
-def validate_required_fields(data: dict, required_fields: List[str]) -> List[str]:
-    """
-    Returns list of missing fields
-    """
-    missing = []
-
-    for field in required_fields:
-        if field not in data or data[field] is None:
-            missing.append(field)
-
-    return missing
+    return validate_positive_int(entity_id)

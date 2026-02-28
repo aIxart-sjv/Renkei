@@ -1,148 +1,103 @@
+// frontend/src/pages/Recommendations.jsx
+
 import { useEffect, useState } from "react";
-import api from "../services/api";
+import "./Recommendations.css";
 
-import StudentCard from "../components/StudentCard";
-import MentorCard from "../components/MentorCard";
-import StartupCard from "../components/StartupCard";
+import { getRecommendations } from "../api/recommendations";
+import Card from "../components/common/Card";
 
-import "../App.css";
+const Recommendations = () => {
 
-export default function Recommendations() {
-  const [data, setData] = useState({
-    students: [],
-    mentors: [],
-    alumni: [],
-    startups: [],
-  });
-
+  const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // Replace with actual logged-in student ID later
-  const studentId = 1;
 
   useEffect(() => {
-    fetchRecommendations();
+    loadRecommendations();
   }, []);
 
-  const fetchRecommendations = async () => {
+  const loadRecommendations = async () => {
     try {
-      setLoading(true);
-
-      // Backend endpoint:
-      // GET /recommendations/{student_id}
-      const response = await api.get(`/recommendations/${studentId}`);
-
-      setData(response.data);
+      // assuming logged-in user id = 1 for now
+      const data = await getRecommendations(1);
+      setRecommendations(data);
     } catch (err) {
-      console.error(err);
-      setError("Failed to load recommendations.");
+      console.error("Recommendation fetch failed");
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="page-container">
-        <h2>Recommendations</h2>
-        <p>Loading AI recommendations...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="page-container">
-        <h2>Recommendations</h2>
-        <p className="error">{error}</p>
-      </div>
-    );
-  }
+  if (loading)
+    return <div className="rec-loading">Generating AI matches...</div>;
 
   return (
-    <div className="page-container">
+    <div className="recommendations-page">
 
-      {/* Header */}
-      <div className="page-header">
-        <h2>AI Recommendations</h2>
-        <p className="page-subtitle">
-          Personalized matches based on skills, interests, and network analysis.
-        </p>
+      <h1 className="rec-title">
+        AI Collaboration Recommendations
+      </h1>
+
+      <p className="rec-subtitle">
+        Ranked connections optimized for innovation impact
+      </p>
+
+      <div className="recommendation-grid">
+
+        {recommendations.map((rec, index) => (
+
+          <Card key={index}>
+
+            <div className="rec-card">
+
+              {/* Rank */}
+              <div className="rec-rank">
+                #{index + 1}
+              </div>
+
+              {/* Name */}
+              <h3>{rec.name}</h3>
+
+              <p className="rec-role">
+                {rec.type}
+              </p>
+
+              {/* Score */}
+              <div className="score-section">
+
+                <div className="score-bar">
+                  <div
+                    className="score-fill"
+                    style={{
+                      width: `${rec.score * 100}%`
+                    }}
+                  />
+                </div>
+
+                <span className="score-text">
+                  {(rec.score * 100).toFixed(1)}% Match
+                </span>
+
+              </div>
+
+              {/* Reason */}
+              <p className="rec-reason">
+                {rec.reason || "High innovation compatibility"}
+              </p>
+
+              <button className="collab-btn">
+                Collaborate
+              </button>
+
+            </div>
+
+          </Card>
+
+        ))}
+
       </div>
-
-      {/* Students */}
-      <section className="section">
-        <h3>Recommended Students</h3>
-
-        {data.students.length === 0 ? (
-          <p>No student recommendations available.</p>
-        ) : (
-          <div className="card-grid">
-            {data.students.map((student) => (
-              <StudentCard
-                key={student.student_id}
-                student={student}
-              />
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* Mentors */}
-      <section className="section">
-        <h3>Recommended Mentors</h3>
-
-        {data.mentors.length === 0 ? (
-          <p>No mentor recommendations available.</p>
-        ) : (
-          <div className="card-grid">
-            {data.mentors.map((mentor) => (
-              <MentorCard
-                key={mentor.mentor_id}
-                mentor={mentor}
-              />
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* Alumni */}
-      <section className="section">
-        <h3>Recommended Alumni</h3>
-
-        {data.alumni.length === 0 ? (
-          <p>No alumni recommendations available.</p>
-        ) : (
-          <div className="card-grid">
-            {data.alumni.map((alumni) => (
-              <MentorCard
-                key={alumni.alumni_id}
-                mentor={alumni}
-              />
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* Startups */}
-      <section className="section">
-        <h3>Recommended Startups</h3>
-
-        {data.startups.length === 0 ? (
-          <p>No startup recommendations available.</p>
-        ) : (
-          <div className="card-grid">
-            {data.startups.map((startup) => (
-              <StartupCard
-                key={startup.startup_id}
-                startup={startup}
-              />
-            ))}
-          </div>
-        )}
-      </section>
 
     </div>
   );
-}
+};
+
+export default Recommendations;

@@ -1,42 +1,182 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, Float, JSON
-from sqlalchemy.sql import func
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Text,
+    DateTime,
+    ForeignKey,
+    Float
+)
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
-from app.database import Base
+from app.models.base import BaseModel
 
 
-class Startup(Base):
+class Startup(BaseModel):
+    """
+    Startup model
+
+    Represents startups in the innovation ecosystem.
+
+    Used in:
+    - startup recommendations
+    - talent matching
+    - graph intelligence
+    - innovation scoring
+    """
+
     __tablename__ = "startups"
 
-    # Primary Key
-    id = Column(Integer, primary_key=True, index=True)
 
-    # Basic Info
-    name = Column(String(255), nullable=False, index=True)
-    domain = Column(String(255), nullable=False)  # AI, FinTech, EdTech, etc.
-    description = Column(Text, nullable=True)
+    # =========================
+    # BASIC INFO
+    # =========================
 
-    # Tech stack (stored as JSON array)
-    # Example: ["FastAPI", "React", "PostgreSQL", "Docker"]
-    tech_stack = Column(JSON, nullable=False)
+    name = Column(
+        String(255),
+        nullable=False,
+        index=True
+    )
 
-    # Founders (list of student IDs stored as JSON array)
-    founders = Column(JSON, nullable=False)
+    description = Column(
+        Text,
+        nullable=True
+    )
 
-    # Startup stage
-    # Examples: Ideation, MVP, Early Revenue, Scaling
-    stage = Column(String(100), nullable=False, default="Ideation")
+    domain = Column(
+        String(255),
+        nullable=True,
+        index=True
+        # example:
+        # AI, FinTech, HealthTech
+    )
 
-    # Funding received
-    funding_received = Column(Float, nullable=True, default=0.0)
+    industry = Column(
+        String(255),
+        nullable=True
+    )
 
-    # Optional links
-    website_url = Column(String(500), nullable=True)
-    github_url = Column(String(500), nullable=True)
-    pitch_deck_url = Column(String(500), nullable=True)
+    product_stage = Column(
+        String(50),
+        nullable=True,
+        default="idea"
+    )
+    # =========================
+    # TECH & PRODUCT INFO
+    # =========================
 
-    # Innovation score (can be calculated by GraphService)
-    innovation_score = Column(Float, nullable=True)
+    tech_stack = Column(
+        Text,
+        nullable=True
+        # example:
+        # Python, React, AWS, FastAPI
+    )
 
-    # Timestamp
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    product_stage = Column(
+        String(100),
+        nullable=True
+        # idea, prototype, MVP, growth, scaling
+    )
+
+
+    # =========================
+    # FOUNDER INFO
+    # =========================
+
+    founder_id = Column(
+        Integer,
+        ForeignKey("students.id", ondelete="SET NULL"),
+        nullable=True,
+        index=True
+    )
+
+
+    # =========================
+    # INNOVATION METRICS (ML FEATURES)
+    # =========================
+
+    innovation_score = Column(
+        Float,
+        default=0.0,
+        nullable=False
+    )
+
+    team_size = Column(
+        Integer,
+        default=1,
+        nullable=False
+    )
+
+
+    # =========================
+    # EXTERNAL LINKS
+    # =========================
+
+    website = Column(
+        String(500),
+        nullable=True
+    )
+
+    github_url = Column(
+        String(500),
+        nullable=True
+    )
+
+    linkedin_url = Column(
+        String(500),
+        nullable=True
+    )
+
+
+    # =========================
+    # LOCATION
+    # =========================
+
+    location = Column(
+        String(255),
+        nullable=True
+    )
+
+
+    # =========================
+    # METADATA
+    # =========================
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+
+    updated_at = Column(
+        DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow,
+        nullable=False
+    )
+
+
+    # =========================
+    # RELATIONSHIPS
+    # =========================
+
+    founder = relationship(
+        "Student",
+        back_populates="startups"
+    )
+
+
+
+
+    # =========================
+    # HELPER METHODS
+    # =========================
+
+    def __repr__(self):
+
+        return (
+            f"<Startup id={self.id} "
+            f"name={self.name} "
+            f"domain={self.domain}>"
+        )

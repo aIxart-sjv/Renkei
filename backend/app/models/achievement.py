@@ -1,40 +1,163 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, JSON
-from sqlalchemy.sql import func
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Float,
+    ForeignKey,
+    DateTime,
+    Text
+)
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
-from app.database import Base
+from app.db.base import Base
 
 
 class Achievement(Base):
+    """
+    Achievement model
+
+    Represents:
+    - Hackathons
+    - Projects
+    - Certifications
+    - Competitions
+    - Startup milestones
+
+    Used in:
+    - Innovation score prediction
+    - ML feature engineering
+    - Recommendation ranking
+    """
+
     __tablename__ = "achievements"
 
-    # Primary Key
-    id = Column(Integer, primary_key=True, index=True)
 
-    # Achievement basic info
-    title = Column(String(255), nullable=False)
-    description = Column(Text, nullable=True)
-    category = Column(String(100), nullable=False)  
-    # Examples: Hackathon, Project, Certification, Startup
+    # =========================
+    # PRIMARY KEY
+    # =========================
 
-    outcome = Column(String(100), nullable=True)  
-    # Examples: Won, Runner-up, Participated, Lost
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
 
-    # Technologies used (stored as JSON array)
-    technologies_used = Column(JSON, nullable=False)
 
-    # Event info
-    event_name = Column(String(255), nullable=True)
-    date = Column(DateTime(timezone=True), nullable=True)
+    # =========================
+    # FOREIGN KEYS
+    # =========================
 
-    # Foreign key linking to Student
-    student_id = Column(Integer, ForeignKey("students.id"), nullable=False)
+    student_id = Column(
+        Integer,
+        ForeignKey("students.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True
+    )
 
-    # Auto timestamp
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    # Relationship with Student model
+    # =========================
+    # ACHIEVEMENT INFO
+    # =========================
+
+    title = Column(
+        String(255),
+        nullable=False
+    )
+
+    description = Column(
+        Text,
+        nullable=True
+    )
+
+    category = Column(
+        String(100),
+        nullable=False
+        # example:
+        # hackathon
+        # project
+        # certification
+        # competition
+        # startup
+    )
+
+
+    # =========================
+    # PERFORMANCE METRICS
+    # =========================
+
+    score = Column(
+        Float,
+        default=0.0,
+        nullable=False
+        # Used by ML model
+    )
+
+    rank = Column(
+        Integer,
+        nullable=True
+    )
+
+    position = Column(
+        String(50),
+        nullable=True
+        # example:
+        # winner
+        # runner-up
+        # finalist
+    )
+
+
+    # =========================
+    # ORGANIZATION INFO
+    # =========================
+
+    organization = Column(
+        String(255),
+        nullable=True
+    )
+
+    achievement_date = Column(
+        DateTime,
+        nullable=True
+    )
+
+
+    # =========================
+    # METADATA
+    # =========================
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow,
+        nullable=False
+    )
+
+    updated_at = Column(
+        DateTime,
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow,
+        nullable=False
+    )
+
+
+    # =========================
+    # RELATIONSHIPS
+    # =========================
+
     student = relationship(
         "Student",
         back_populates="achievements"
     )
+
+
+    # =========================
+    # HELPER METHODS
+    # =========================
+
+    def __repr__(self):
+        return (
+            f"<Achievement id={self.id} "
+            f"title={self.title} "
+            f"score={self.score}>"
+        )
