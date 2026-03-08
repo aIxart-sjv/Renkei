@@ -842,3 +842,1221 @@ Traceback (most recent call last):
               ^^^^^^^^^^^^^^^^^
 AttributeError: module 'bcrypt' has no attribute '__about__'
 2026-02-28 15:51:14 | INFO | app.db.session | Connecting to database: localhost:5432
+2026-03-02 13:29:47 | INFO | app.db.session | Connecting to database: localhost:5432
+2026-03-02 13:32:07 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:07 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:07 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:07 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:07 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:07 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:07 | INFO | app.ml.inference.embedder | Loading embedding model...
+2026-03-02 13:32:07 | INFO | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2026-03-02 13:32:07 | INFO | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-02 13:32:08 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:08 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:09 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:09 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:09 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:09 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:10 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:10 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/README.md "HTTP/1.1 200 OK"
+2026-03-02 13:32:10 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:10 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-02 13:32:10 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:10 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:10 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:11 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-02 13:32:11 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:11 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:11 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:12 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:12 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:12 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:12 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-02 13:32:12 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-02 13:32:13 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 13:32:13 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-02 13:32:13 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-03-02 13:32:13 | INFO | app.ml.inference.embedder | Embedding model loaded
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.ml.inference.innovation_predictor | Innovation model loaded
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:14 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:14 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:14 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:15 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:15 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:15 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:15 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:15 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:15 | INFO | app.ml.inference.recommender | Recommendations generated for student 1
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:15 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:15 | INFO | app.graph.algorithms | Centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:32:15 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:32:15 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:32:15 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:32:15 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:17 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:17 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:17 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:17 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:17 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:17 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | INFO | app.ml.inference.recommender | Recommendations generated for student 1
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.algorithms | Centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:18 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:18 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:18 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:18 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:28 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:28 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:28 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | INFO | app.ml.inference.recommender | Recommendations generated for student 2
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:29 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:29 | INFO | app.graph.algorithms | Centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 13:33:29 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 13:33:29 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 13:33:29 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 13:33:29 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 14:59:33 | INFO | app.db.session | Connecting to database: localhost:5432
+2026-03-02 15:01:47 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:47 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:47 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:47 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:47 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:47 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:47 | INFO | app.ml.inference.embedder | Loading embedding model...
+2026-03-02 15:01:47 | INFO | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2026-03-02 15:01:47 | INFO | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2026-03-02 15:01:48 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:48 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:48 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:48 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:49 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config_sentence_transformers.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:49 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config_sentence_transformers.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:49 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:49 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/README.md "HTTP/1.1 200 OK"
+2026-03-02 15:01:49 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/modules.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:49 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/modules.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:49 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/sentence_bert_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:49 | WARNING | huggingface_hub.utils._http | Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-03-02 15:01:50 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/sentence_bert_config.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:50 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/adapter_config.json "HTTP/1.1 404 Not Found"
+2026-03-02 15:01:50 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:50 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:51 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:51 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/config.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:51 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:51 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:51 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-02 15:01:52 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-02 15:01:52 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/resolve/main/1_Pooling/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-02 15:01:52 | INFO | httpx | HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/sentence-transformers/all-MiniLM-L6-v2/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/1_Pooling%2Fconfig.json "HTTP/1.1 200 OK"
+2026-03-02 15:01:52 | INFO | httpx | HTTP Request: GET https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2 "HTTP/1.1 200 OK"
+2026-03-02 15:01:52 | INFO | app.ml.inference.embedder | Embedding model loaded
+2026-03-02 15:01:52 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:52 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:52 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:52 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:52 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:52 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:52 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:52 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:52 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:52 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:52 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:52 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.ml.inference.innovation_predictor | Innovation model loaded
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:53 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | INFO | app.ml.inference.recommender | Recommendations generated for student 1
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:54 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:54 | INFO | app.graph.algorithms | Centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-02 15:01:54 | INFO | app.graph.builder | Added 59 edges
+2026-03-02 15:01:54 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-02 15:01:54 | ERROR | app.ml.inference.innovation_predictor | Model prediction failed: X has 7 features, but RandomForestRegressor is expecting 8 features as input.
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Degree centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Betweenness centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Closeness centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Eigenvector centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.centrality | Composite centrality computed
+2026-03-02 15:01:54 | INFO | app.graph.pagerank | PageRank computed successfully
+2026-03-07 21:29:28 | INFO | app.db.session | Connecting to database: localhost:5432
+2026-03-07 22:18:12 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:18:12 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:18:12 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:18:12 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:18:12 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:18:12 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:20:06 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:20:06 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:20:06 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:20:06 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:20:06 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:20:06 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:21:23 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:21:23 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:21:23 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:21:23 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:21:23 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:21:23 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:21:33 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:21:33 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:21:33 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:21:33 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:21:33 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:21:33 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:21:35 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:21:35 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:21:35 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:21:35 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:21:35 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:21:35 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:21:39 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:21:39 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:21:39 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:21:39 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:21:39 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:21:39 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:21:52 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:21:52 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:21:52 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:21:52 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:21:52 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:21:52 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:21:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:21:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:21:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:21:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:21:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:21:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:21:55 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:21:55 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:21:55 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:21:55 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:21:55 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:21:55 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:21:59 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:21:59 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:21:59 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:21:59 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:21:59 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:21:59 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:25:50 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:25:50 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:25:50 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:25:50 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:25:50 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:25:50 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:25:51 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:25:51 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:25:51 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:25:51 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:25:51 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:25:51 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:27:29 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:27:29 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:27:29 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:27:29 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:27:29 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:27:29 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:28:56 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:28:56 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:28:56 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:28:56 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:28:56 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:28:56 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:32:02 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:32:02 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:32:02 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:32:02 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:32:02 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:32:02 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:35:53 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:35:53 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:35:53 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:35:53 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:35:53 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:35:53 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:35:57 | INFO | app.graph.builder | Added 25 student nodes
+2026-03-07 22:35:57 | INFO | app.graph.builder | Added 10 mentor nodes
+2026-03-07 22:35:57 | INFO | app.graph.builder | Added 8 alumni nodes
+2026-03-07 22:35:57 | INFO | app.graph.builder | Added 6 startup nodes
+2026-03-07 22:35:57 | INFO | app.graph.builder | Added 59 edges
+2026-03-07 22:35:57 | INFO | app.graph.builder | Graph built: 25 nodes, 50 edges
+2026-03-07 22:52:40 | INFO | app.db.session | Connecting to database: localhost:5432

@@ -61,7 +61,7 @@ def get_current_user(
             algorithms=[settings.JWT_ALGORITHM],
         )
 
-        user_id: int | None = payload.get("sub")
+        user_id: int | None = int(payload.get("sub"))
 
         if user_id is None:
             raise credentials_exception
